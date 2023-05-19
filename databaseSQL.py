@@ -30,16 +30,19 @@ class database:
         row = cursor.fetchone()
         li = []
         while row:
-            if(tablename == "Users"):
-                if(row[3] == "customer"):
+            if(tablename == "Account"):
+                if(row[3] == "Customer"):
                     li.append(models.Customer(row))
                 else :
                     li.append(models.Admin(row))
-            # elif(tablename == "Train"):
-            #     li.append(models.Train(row))
-            # elif(tablename=="Trip"):
-            #     li.append(models.Trip)
-            # elif(tablename=="seat"):
-            #     li.append(models.Seat)
+            elif(tablename == "Train"):
+                li.append(models.Train(row))
+            elif(tablename=="Trip"):
+                trip = models.Trip(row)
+                trip.train = selectAll("Train",f"train_id = {row[1]};")[0]
+                trip.seats = selectAll("Seat",f"trip_id = {row[0]};")
+                li.append(trip)
+            elif(tablename=="seat"):
+                li.append(models.Seat)
             row=cursor.fetchone()   
         return li

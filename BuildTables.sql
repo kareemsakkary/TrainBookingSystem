@@ -19,7 +19,7 @@ CREATE TABLE Train
 (
  train_id INT NOT NULL IDENTITY(1,1),
  capacity INT NOT NULL,
-  status VARCHAR(255) NOT NULL,
+ status VARCHAR(255) NOT NULL,
  no_of_carts INT,
  manufacturer VARCHAR(255),
  PRIMARY KEY (train_id),
