@@ -4,6 +4,7 @@ class Account:
         self.account_id = row[0]
         self.email = row[1]
         self.password = row[2]
+        self.role = row[3]
         self.name = row[4]
         self.phone_num = row[5]
         self.address =row[6]
