@@ -37,10 +37,10 @@ CREATE TABLE Trip
  trip_id INT NOT NULL IDENTITY(1,1),
  train_id INT NOT NULL,
  price FLOAT NOT NULL,
- start_date DATE NOT NULL,
- end_date DATE NOT NULL,
- start_time TIME NOT NULL, 
- end_time TIME NOT NULL,
+ start_date DATETIME NOT NULL,
+ end_date DATETIME NOT NULL,
+--  start_time TIME NOT NULL, 
+--  end_time TIME NOT NULL,
  departure_station VARCHAR(255) NOT NULL,
  arrival_station VARCHAR(255) NOT NULL,
  PRIMARY KEY (trip_id),
@@ -50,7 +50,7 @@ CREATE TABLE Trip
  CHECK (start_date <= end_date),
 
  -- Check that the start time is before the end time
- CHECK (start_time < end_time)
+--  CHECK (start_time < end_time)
 );
 
 

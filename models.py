@@ -67,22 +67,21 @@ class Train:
         return st
     
 class Trip:
-    def __init__(self,row=[None,None,None,None,None,None,None,None,None]):
+    def __init__(self,row=[None,None,None,None,None,None,None]):
         self.table = "Trip"
         self.trip_id = row[0]
         self.train_id= row[1]
         self.price = row[2]
         self.start_date = row[3]
-        self.start_time = row[4]
-        self.end_date = row[5]
-        self.end_time =row[6]
-        self.departure_station = row[7]
-        self.arrival_station = row[8]
+        self.end_date = row[4]
+        self.departure_station = row[5]
+        self.arrival_station = row[6]
         self.seats=[]
+        self.ETA = None
         self.train = None
     def add(self) -> str:
-        table= 'Trip(train_id,price,start_date,end_date,start_time,end_time,departure_station,arrival_station) '
-        values =f"VALUES('{self.train.train_id}','{self.price}','{self.start_date}','{self.end_date}','{self.start_time}','{self.end_time}','{self.departure_station}','{self.arrival_station}');"
+        table= 'Trip(train_id,price,start_date,end_date,departure_station,arrival_station) '
+        values =f"VALUES('{self.train.train_id}','{self.price}','{self.start_date}','{self.end_date}','{self.departure_station}','{self.arrival_station}');"
         return table+values
     def setTrain(self):
         for i in range(self.train.capacity):
@@ -97,14 +96,15 @@ class Trip:
         price = {self.price},
         start_date = {self.start_date},
         end_date = {self.end_date},
-        start_time = {self.start_time},
-        end_time = {self.end_time},
         departure_station =' {self.departure_station}',
         arrival_station = '{self.arrival_station}',
          where trip_id = {self.trip_id}
         """
         return st
-
+    def setDates(self,start , end):
+        self.start_date = start
+        self.end_date = end
+        return end-start
 class Seat:
     def __init__(self,row=[None,None,None]) -> None:
         self.table = "Seat"
