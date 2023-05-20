@@ -31,6 +31,13 @@ class database:
                 trip = self.getLastRecord("Trip","Trip_id")
                 trip.setTrain()
                 self.addRecord(trip)
+            if(data.table == "Booking"):
+                cursor = self.connection.cursor()
+                sql = f"""
+                    UPDATE TOP({data.no_of_seats}) Seat SET status = 'booked' WHERE trip_id = {data.trip.trip_id} AND status = 'available';
+                """
+                cursor.execute(sql)
+                data.trip = self.selectAll("Trip",f"trip_id = {data.trip.trip_id}")
 
     def getLastRecord(self,table_name,column):
         cursor = self.connection.cursor()
@@ -60,7 +67,7 @@ class database:
         """
         cursor.execute(sql)
         
-    def selectAll(self,tablename,where=None ):
+    def selectAll(self,tablename,where=None):
         cursor = self.connection.cursor()
         sql = ""
         if(where == None):
@@ -85,7 +92,15 @@ class database:
                 li.append(trip)
             elif(tablename=="Seat"):
                 li.append(models.Seat(row))
+            elif(tablename=="Booking"):
+                booking = models.Booking(row)
+                booking.trip = self.selectAll("Trip",f"trip = {row[2]};")[0]
+                booking.account = self.selectAll("Account",f"account = {row[1]};")[0]
+                li.append(booking)
         return li
+    
+    def count(self,tablename,where=None):
+        return len(self.selectAll(tablename,where))
     
     def update(self,data):
         cursor = self.connection.cursor()

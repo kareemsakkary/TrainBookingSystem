@@ -20,7 +20,6 @@ class Account:
         """
         return st
 
-
 class Customer(Account):
     def __init__(self,row=None):
         if(row == None):
@@ -66,7 +65,6 @@ class Train:
         """
         return st
     
-
 class Trip:
     def __init__(self,row=[None,None,None,None,None,None,None,None,None]):
         self.table = "Trip"
@@ -105,6 +103,7 @@ class Trip:
          where trip_id = {self.trip_id}
         """
         return st
+
 class Seat:
     def __init__(self,row=[None,None,None]) -> None:
         self.table = "Seat"
@@ -120,3 +119,19 @@ class Seat:
          where seat_id = {self.seat_id} and trip_id = {self.trip_id}
         """
         return st
+
+class Booking:
+    def __init__(self, row = [None,None,None,None]) -> None:
+        self.table = "Booking"
+        self.booking_id = row[0]
+        self.no_of_seats = row[3]
+        self.trip = None
+        self.account = None
+        self.price = None
+    def add(self) -> str:
+        table= 'Booking(account_id,trip_id,no_of_seats) '
+        values =f"VALUES('{self.account.account_id}','{self.trip.trip_id}','{self.no_of_seats}');"
+        return table+values
+    def set_seats_num(self,num):
+        self.no_of_seats = num
+        self.price = self.trip.price * self.no_of_seats
