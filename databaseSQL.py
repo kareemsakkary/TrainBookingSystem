@@ -7,10 +7,51 @@ class database:
         
     def addRecord(self,data):
         cursor = self.connection.cursor()
-        sql = f"""
-        INSERT INTO {data.add()}
+        sql = f""""""
+        if(data.table =="Trip" and len(data.seats) > 0):
+            sql = f"""
+                INSERT INTO Seat(seat_id,trip_id,status) VALUES         
+                """
+            i = 0
+            for seat in data.seats:
+                if(i!= 0):
+                    sql+=','
+                sql += seat.add()
+                i+=1
+            sql +=';'
+            print(sql)
+            cursor.execute(sql)
+        else:
+            cursor = self.connection.cursor()
+            sql = f"""
+            INSERT INTO {data.add()}
+            """
+            cursor.execute(sql)
+            if(data.table == "Trip"):
+                trip = self.getLastRecord("Trip","Trip_id")
+                trip.setTrain()
+                self.addRecord(trip)
+
+    def getLastRecord(self,table_name,column):
+        cursor = self.connection.cursor()
+        sql =f"""
+        SELECT MAX({column})
+        FROM {table_name};
         """
         cursor.execute(sql)
+        id = cursor.fetchone()[0]
+        cursor = self.connection.cursor()
+        sql =f"""
+        SELECT *
+        FROM {table_name} WHERE {column} = {id};
+        """
+        cursor.execute(sql)
+        trip=None
+        row = cursor.fetchall()[0]
+        if(table_name == "Trip"):
+            trip = models.Trip(row)
+            trip.train= self.selectAll("Train",f"train_id = {row[1]};")[0]
+        return trip
 
     def deleteRecord(self,tableName,where):
         cursor = self.connection.cursor()
@@ -27,9 +68,9 @@ class database:
         else:
             sql = f"""select * from {tablename} WHERE {where}"""
         cursor.execute(sql)
-        row = cursor.fetchone()
+        rows = cursor.fetchall()
         li = []
-        while row:
+        for row in rows: 
             if(tablename == "Account"):
                 if(row[3] == "Customer"):
                     li.append(models.Customer(row))
@@ -39,10 +80,9 @@ class database:
                 li.append(models.Train(row))
             elif(tablename=="Trip"):
                 trip = models.Trip(row)
-                trip.train = selectAll("Train",f"train_id = {row[1]};")[0]
-                trip.seats = selectAll("Seat",f"trip_id = {row[0]};")
+                trip.train = self.selectAll("Train",f"train_id = {row[1]};")[0]
+                trip.seats = self.selectAll("Seat",f"trip_id = {row[0]};")
                 li.append(trip)
-            elif(tablename=="seat"):
-                li.append(models.Seat)
-            row=cursor.fetchone()   
+            elif(tablename=="Seat"):
+                li.append(models.Seat(row))
         return li

@@ -56,11 +56,11 @@ CREATE TABLE Trip
 
 CREATE TABLE Seat
 (
- seat_id INT NOT NULL IDENTITY(1,1),
+ seat_id INT NOT NULL,
  trip_id INT NOT NULL,
  status VARCHAR(255) NOT NULL,
  PRIMARY KEY (seat_id, trip_id),
- FOREIGN KEY (trip_id) REFERENCES Trip (trip_id),
+ FOREIGN KEY (trip_id) REFERENCES Trip (trip_id) ON DELETE CASCADE,
 
  -- Check that the status is one of "available" or "booked"
  CHECK (status IN ('available', 'booked'))
@@ -74,8 +74,8 @@ CREATE TABLE Booking
  trip_id INT NOT NULL,
  no_of_seats INT NOT NULL,
  PRIMARY KEY (booking_id),
- FOREIGN KEY (account_id) REFERENCES Account (account_id),
- FOREIGN KEY (trip_id) REFERENCES Trip (trip_id),
+ FOREIGN KEY (account_id) REFERENCES Account (account_id) ON DELETE CASCADE,
+ FOREIGN KEY (trip_id) REFERENCES Trip (trip_id) ON DELETE CASCADE,
 
  -- Check that the number of seats is positive
  CHECK (no_of_seats > 0)

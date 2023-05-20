@@ -2,14 +2,14 @@ import databaseSQL
 import models
 import datetime
 db = databaseSQL.database()
-cus = models.Customer()
-cus.name="waleed"
-cus.email="waleed@gmail.com"
-cus.address="address"
-cus.password="123456789"
-cus.phone_num="0111"
-cus.date_of_birth = datetime.date(2002,4,25)
-db.addRecord(cus)
-# db.deleteRecord("Users","name = 'waleed 3l2'")
-for i in db.selectAll("Users"):
-    print(i.name)
+
+
+
+# for i in db.selectAll("Trip"):
+#     print("trip id :",i.trip_id)
+#     print("train id :",i.train.train_id)
+#     print("Seats :")
+#     for j in i.seats :
+#         print(j.seat_id)
+for i in db.selectAll("Seat"):
+    print(i.seat_id," ",i.trip_id)

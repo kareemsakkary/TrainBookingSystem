@@ -62,13 +62,20 @@ class Trip:
         self.train = None
     def add(self) -> str:
         table= 'Trip(train_id,price,start_date,end_date,start_time,end_time,departure_station,arrival_station) '
-        values =f"VALUES('{self.train_id}','{self.price}','{self.start_date}','{self.end_date}','{self.start_time}','{self.end_time}','{self.departure_station}','{self.arrival_station}');"
+        values =f"VALUES('{self.train.train_id}','{self.price}','{self.start_date}','{self.end_date}','{self.start_time}','{self.end_time}','{self.departure_station}','{self.arrival_station}');"
         return table+values
-class seat:
+    def setTrain(self):
+        for i in range(self.train.capacity):
+            seat = Seat()
+            seat.seat_id = i+1
+            seat.trip_id = self.trip_id
+            seat.status = "available"
+            self.seats.append(seat)
+class Seat:
     def __init__(self,row=[None,None,None]) -> None:
         self.seat_id = row[0]
         self.trip_id = row[1]
-        self.statues = row[2]
+        self.status = row[2]
     def add(self) ->str:
-        table = 'Seat(trip_id,status) '
-        values = f"VALUES('{self.trip_id}','{self.statues}')'"
+        values = f"('{self.seat_id}','{self.trip_id}','{self.status}')"
+        return values
