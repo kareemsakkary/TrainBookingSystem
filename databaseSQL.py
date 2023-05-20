@@ -86,3 +86,10 @@ class database:
             elif(tablename=="Seat"):
                 li.append(models.Seat(row))
         return li
+    
+    def update(self,data):
+        cursor = self.connection.cursor()
+        sql = f"""
+            UPDATE {data.table} SET {data.update()}
+        """
+        cursor.execute(sql)

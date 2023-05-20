@@ -1,13 +1,25 @@
 class Account:
     def __init__(self,row=[None,None,None,None,None,None,None,None]):
         self.table = "Account"
-        self.user_id = row[0]
+        self.account_id = row[0]
         self.email = row[1]
         self.password = row[2]
         self.name = row[4]
         self.phone_num = row[5]
         self.address =row[6]
         self.date_of_birth =row[7]   
+    def update(self) -> str:
+        st = f"""
+        email = '{self.email}',
+        password = '{self.password}',
+        name = '{self.name}',
+        phone_num = '{self.phone_num}',
+        address = '{self.address}',
+        date_of_birth = '{self.date_of_birth}'
+         where account_id = {self.account_id}
+        """
+        return st
+
 
 class Customer(Account):
     def __init__(self,row=None):
@@ -42,8 +54,17 @@ class Train:
         
     def add(self) -> str:
         table= 'Train(capacity,status,no_of_carts,manufacturer)'
-        values =f"VALUES('{self.capacity}','{self.status}','{self.no_of_cart}','{self.manufacture}');"
+        values =f"VALUES({self.capacity},'{self.status}','{self.no_of_cart}','{self.manufacture}');"
         return table+values
+    def update(self) -> str:
+        st = f"""
+        capacity = {self.capacity},
+        status = '{self.status}',
+        no_of_cart = {self.no_of_cart},
+        manufacture = '{self.manufacture}',
+         where train_id = {self.train_id}
+        """
+        return st
     
 
 class Trip:
@@ -71,11 +92,31 @@ class Trip:
             seat.trip_id = self.trip_id
             seat.status = "available"
             self.seats.append(seat)
+    def update(self) -> str:
+        st = f"""
+        train_id = {self.train.train_id},
+        price = {self.price},
+        start_date = {self.start_date},
+        end_date = {self.end_date},
+        start_time = {self.start_time},
+        end_time = {self.end_time},
+        departure_station =' {self.departure_station}',
+        arrival_station = '{self.arrival_station}',
+         where trip_id = {self.trip_id}
+        """
+        return st
 class Seat:
     def __init__(self,row=[None,None,None]) -> None:
+        self.table = "Seat"
         self.seat_id = row[0]
         self.trip_id = row[1]
         self.status = row[2]
     def add(self) ->str:
         values = f"('{self.seat_id}','{self.trip_id}','{self.status}')"
         return values
+    def update(self) ->str:
+        st = f"""
+        status = '{self.status}',
+         where seat_id = {self.seat_id} and trip_id = {self.trip_id}
+        """
+        return st
