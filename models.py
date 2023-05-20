@@ -60,9 +60,9 @@ class Train:
         st = f"""
         capacity = {self.capacity},
         status = '{self.status}',
-        no_of_cart = {self.no_of_cart},
-        manufacture = '{self.manufacture}',
-         where train_id = {self.train_id}
+        no_of_carts = '{self.no_of_cart}',
+        manufacturer = '{self.manufacture}'
+         where train_id = '{self.train_id}'
         """
         return st
     
@@ -97,7 +97,7 @@ class Trip:
         start_date = {self.start_date},
         end_date = {self.end_date},
         departure_station =' {self.departure_station}',
-        arrival_station = '{self.arrival_station}',
+        arrival_station = '{self.arrival_station}'
          where trip_id = {self.trip_id}
         """
         return st
@@ -116,7 +116,7 @@ class Seat:
         return values
     def update(self) ->str:
         st = f"""
-        status = '{self.status}',
+        status = '{self.status}'
          where seat_id = {self.seat_id} and trip_id = {self.trip_id}
         """
         return st

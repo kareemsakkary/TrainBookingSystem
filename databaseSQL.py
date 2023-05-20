@@ -106,6 +106,7 @@ class database:
     def update(self,data):
         cursor = self.connection.cursor()
         sql = f"""
-            UPDATE {data.table} SET {data.update()}
+            UPDATE {data.table} SET {data.update()};
         """
+        print(sql)
         cursor.execute(sql)
