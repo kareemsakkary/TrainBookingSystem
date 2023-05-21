@@ -116,6 +116,13 @@ class SignupScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success registration!")
+        msg.setText("Signed up successfully!")
+        msg.setIcon(QMessageBox.Information)
+        x = msg.exec_()
+
     def signupfunction(self):
         name = self.inputName.text()
         email = self.inputEmail.text()
@@ -128,6 +135,7 @@ class SignupScreen(QDialog):
             self.errorMsg.setText("Please input all the required fields!")
         # see which is checked, then add it
         elif self.adminRadioButton.isChecked():
+            self.showMessageBox()
             acc = models.Admin()
             acc.name = name
             acc.email = email
@@ -138,6 +146,7 @@ class SignupScreen(QDialog):
             db.addRecord(acc)
             self.returnPrevScreen()
         elif self.customerRadioButton.isChecked():
+            self.showMessageBox()
             acc = models.Customer()
             acc.name = name
             acc.email = email
@@ -226,6 +235,13 @@ class AddTrainScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success addition!")
+        msg.setText("Train added successfully!")
+        msg.setIcon(QMessageBox.Information)
+        x = msg.exec_()
+
     def addtrainfunction(self):
         cap = self.inputCapacity.text()
         numOfCart = self.inputNumofcart.text()
@@ -234,6 +250,7 @@ class AddTrainScreen(QDialog):
                 manufacture) == 0 or (not self.activeRadioButton.isChecked() and not self.inactiveRadioButton.isChecked()):
             self.error.setText("Please input all the required fields!")
         else:
+            self.showMessageBox()
             train = models.Train()
             train.capacity = int(cap)
             train.no_of_cart = int(numOfCart)
@@ -313,6 +330,13 @@ class UpdateTrainScreen(QDialog):
         self.inputNumofcart.setValidator(intValidator)
         self.inputManufacturer.setValidator(stringValidator)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success changes!")
+        msg.setText("Train updated successfully!")
+        msg.setIcon(QMessageBox.Information)
+        x = msg.exec_()
+
     def clearSelected(self):
         # reset the selected train data to none
         selectedTrain.train_id = ""
@@ -341,6 +365,7 @@ class UpdateTrainScreen(QDialog):
                 manufacture) == 0 or (not self.activeRadioButton.isChecked() and not self.inactiveRadioButton.isChecked()):
             self.error.setText("Cannot update without the required fields!")
         else:
+            self.showMessageBox()
             selectedTrain.capacity = cap
             selectedTrain.no_of_cart = numOfCart
             selectedTrain.manufacture = manufacture
