@@ -40,7 +40,7 @@ class Admin(Account):
             super().__init__(row)
     def add(self) -> str:
         table= 'Account(name,password,role,email,phone_num,address,date_of_birth)'
-        values =f"VALUES('{self.name}','{self.password}',admin,'{self.email}','{self.phone_num}','{self.address}','{self.date_of_birth}');"
+        values =f"VALUES('{self.name}','{self.password}','admin','{self.email}','{self.phone_num}','{self.address}','{self.date_of_birth}');"
         return table+values
 
 class Train:

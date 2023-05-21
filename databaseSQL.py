@@ -89,7 +89,7 @@ class database:
                 trip = models.Trip(row)
                 trip.train = self.selectAll("Train",f"train_id = {row[1]};")[0]
                 trip.seats = self.selectAll("Seat",f"trip_id = {row[0]};")
-                trip.ETA = trip.end_date-trip.end_time
+                trip.ETA = trip.end_date-trip.start_date
                 li.append(trip)
             elif(tablename=="Seat"):
                 li.append(models.Seat(row))
@@ -108,5 +108,4 @@ class database:
         sql = f"""
             UPDATE {data.table} SET {data.update()};
         """
-        print(sql)
         cursor.execute(sql)

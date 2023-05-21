@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>840</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="frame" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>850</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#frame{
+    
+	background-color: qlineargradient(spread:pad, x1:0.467, y1:0.37, x2:1, y2:1, stop:0 rgba(0, 80, 138, 255), stop:1 rgba(255, 255, 255, 255));
+	
+}</string>
+   </property>
+   <widget class="QLabel" name="title">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>721</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20 20pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Make your unforgettable train experience with us!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="optionmsg">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>561</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20 17pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Please choose one of the following options:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addTrainButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>230</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-radius: 20px;
+background-color: rgb(255, 255, 255);
+font: 63 12pt &quot;Sitka Small Semibold&quot;;
+color:rgb(0, 86, 148);
+}
+
+QPushButton:hover{
+	background-color: #00508a;
+	color:white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Add a train</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="updateTripButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>490</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-radius: 20px;
+background-color: rgb(255, 255, 255);
+font: 63 12pt &quot;Sitka Small Semibold&quot;;
+color:rgb(0, 86, 148);
+}
+
+QPushButton:hover{
+	background-color: #00508a;
+	color:white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Update a trip details</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addTripButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>360</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-radius: 20px;
+background-color: rgb(255, 255, 255);
+font: 63 12pt &quot;Sitka Small Semibold&quot;;
+color:rgb(0, 86, 148);
+}
+
+QPushButton:hover{
+	background-color: #00508a;
+	color:white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Add a trip</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="updateTrainButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>620</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-radius: 20px;
+background-color: rgb(255, 255, 255);
+font: 63 12pt &quot;Sitka Small Semibold&quot;;
+color:rgb(0, 86, 148);
+}
+
+QPushButton:hover{
+	background-color: #00508a;
+	color:white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Update a train details</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="returnButton">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>780</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-radius: 20px;
+background-color:qlineargradient(spread:pad, x1:0.467, y1:0.37, x2:1, y2:1, stop:0 rgba(0, 80, 138, 255), stop:1 rgba(255, 255, 255, 255));
+font: 63 12pt &quot;Sitka Small Semibold&quot;;
+color:white;
+}
+
+QPushButton:hover{
+	background-color: white;
+	color: #00508a;
+}</string>
+    </property>
+    <property name="text">
+     <string>Return</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
