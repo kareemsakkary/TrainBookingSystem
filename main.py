@@ -1,11 +1,12 @@
 import databaseSQL
 import models
-import datetime
+from datetime import datetime
 db = databaseSQL.database()
-for i in db.selectAll("Train"):
-    print(i.train_id , i.status)
-train = db.selectAll("Train")[0]
-train.status = 'active'
-db.update(train)
-for i in db.selectAll("Train"):
-    print(i.train_id , i.status)
+
+trip = db.selectAll("Trip")[0]
+acc = db.selectAll("Account")[0]
+booking = models.Booking()
+booking.account = acc
+booking.trip = trip
+booking.set_seats_num(1)
+db.addRecord(booking)

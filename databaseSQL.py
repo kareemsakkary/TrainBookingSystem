@@ -9,12 +9,23 @@ class database:
         cursor = self.connection.cursor()
         sql = f""""""
         if(data.table =="Trip" and len(data.seats) > 0):
-            for seat in data.seats:
-                sql = f"""
-                INSERT INTO Seat(seat_id,trip_id,status) VALUES {seat.add()};     
+            sql = f"""
+                INSERT INTO Seat(seat_id,trip_id,status) VALUES         
                 """
-                cursor.execute(sql)
-
+            i = 0
+            for seat in data.seats:
+                if(i!= 0):
+                    sql+=','
+                sql += seat.add()
+                i+=1
+                if(i == 999):
+                    sql +=';'
+                    cursor.execute(sql)
+                    sql = f"""
+                    INSERT INTO Seat(seat_id,trip_id,status) VALUES         
+                    """
+                    i=0
+            
         else:
             cursor = self.connection.cursor()
             sql = f"""
@@ -102,4 +113,5 @@ class database:
         sql = f"""
             UPDATE {data.table} SET {data.update()};
         """
+        print(sql)
         cursor.execute(sql)

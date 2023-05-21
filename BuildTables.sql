@@ -1,7 +1,7 @@
 CREATE TABLE Account
 (
  account_id INT NOT NULL IDENTITY(1,1),
- email VARCHAR(255) NOT NULL,
+ email VARCHAR(255) NOT NULL UNIQUE,
  password VARCHAR(255) NOT NULL,
  role VARCHAR(255) NOT NULL,
  name VARCHAR(255) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE Trip
  departure_station VARCHAR(255) NOT NULL,
  arrival_station VARCHAR(255) NOT NULL,
  PRIMARY KEY (trip_id),
- FOREIGN KEY (train_id) REFERENCES Train (train_id),
+ FOREIGN KEY (train_id) REFERENCES Train (train_id) ON DELETE CASCADE,
 
  -- Check that the start date is before the end date
  CHECK (start_date <= end_date),
