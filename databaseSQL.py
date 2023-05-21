@@ -9,18 +9,12 @@ class database:
         cursor = self.connection.cursor()
         sql = f""""""
         if(data.table =="Trip" and len(data.seats) > 0):
-            sql = f"""
-                INSERT INTO Seat(seat_id,trip_id,status) VALUES         
-                """
-            i = 0
             for seat in data.seats:
-                if(i!= 0):
-                    sql+=','
-                sql += seat.add()
-                i+=1
-            sql +=';'
-            print(sql)
-            cursor.execute(sql)
+                sql = f"""
+                INSERT INTO Seat(seat_id,trip_id,status) VALUES {seat.add()};     
+                """
+                cursor.execute(sql)
+
         else:
             cursor = self.connection.cursor()
             sql = f"""
