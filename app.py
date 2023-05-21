@@ -121,17 +121,34 @@ class SignupScreen(QDialog):
         msg.setWindowTitle("Success registration!")
         msg.setText("Signed up successfully!")
         msg.setIcon(QMessageBox.Information)
-        x = msg.exec_()
+        msg.exec_()
+
+    def uniqueEmail(self, mail):
+        unique = True
+        for i in db.selectAll("Account", f"email ='{mail}'"):
+            unique = False
+        return unique
+
 
     def signupfunction(self):
+        # reset error msg
+        self.error.setText("")
+        self.emailError.setText("")
+        
         name = self.inputName.text()
         email = self.inputEmail.text()
         password = self.inputPassword.text()
         phoneNum = self.inputNumber.text()
         dob = self.inputDob.text()
         address = self.inputAddress.text()
-        if len(name) == 0 or len(email) == 0 or len(password) == 0 or len(phoneNum) == 0 or len(address) == 0:
+        
+        if not self.uniqueEmail(email):
             self.error.setText("")
+            self.errorMsg.setText("")
+            self.emailError.setText("An account is already registered with your email!")
+        elif len(name) == 0 or len(email) == 0 or len(password) == 0 or len(phoneNum) == 0 or len(address) == 0:
+            self.error.setText("")
+            self.emailError.setText("")
             self.errorMsg.setText("Please input all the required fields!")
         # see which is checked, then add it
         elif self.adminRadioButton.isChecked():
@@ -179,6 +196,13 @@ class UpdateUserScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success changes!")
+        msg.setText("Profile updated successfully!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
     def loadUserInfo(self):
         # extract the date
         year = int(loggedInUser.date_of_birth[0:4])
@@ -200,6 +224,7 @@ class UpdateUserScreen(QDialog):
         self.customerRadioButton.setEnabled(False)
 
     def updateuserfunction(self):
+        self.showMessageBox()
         acc = models.Account()
         acc.account_id = loggedInUser.account_id
         acc.name = self.inputName.text()
@@ -240,7 +265,7 @@ class AddTrainScreen(QDialog):
         msg.setWindowTitle("Success addition!")
         msg.setText("Train added successfully!")
         msg.setIcon(QMessageBox.Information)
-        x = msg.exec_()
+        msg.exec_()
 
     def addtrainfunction(self):
         cap = self.inputCapacity.text()
@@ -335,7 +360,7 @@ class UpdateTrainScreen(QDialog):
         msg.setWindowTitle("Success changes!")
         msg.setText("Train updated successfully!")
         msg.setIcon(QMessageBox.Information)
-        x = msg.exec_()
+        msg.exec_()
 
     def clearSelected(self):
         # reset the selected train data to none
