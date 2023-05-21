@@ -507,7 +507,8 @@ class ShowAllTrips(QDialog):
             selectedTrip.trip_id = self.tableWidget.item(row, 0).text()
             selectedTrip.departure_station = self.tableWidget.item(row, 1).text()
             selectedTrip.arrival_station = self.tableWidget.item(row, 2).text()
-            selectedTrip.price = self.tableWidget.item(row, 3).text()
+            # print(self.tableWidget.item(row, 3).text())
+            selectedTrip.price = float(self.tableWidget.item(row, 3).text())
             selectedTrip.start_date = self.tableWidget.item(row, 4).text()
             selectedTrip.end_date = self.tableWidget.item(row, 5).text()
             self.gotobooktrip()
@@ -571,7 +572,7 @@ class BookTripScreen(QDialog):
         self.arrivalStationLabel.setText(selectedTrip.arrival_station)
         self.startDateLabel.setText(selectedTrip.start_date)
         self.endDateLabel.setText(selectedTrip.end_date)
-        self.totalPriceLabel.setText(selectedTrip.price)
+        self.totalPriceLabel.setText(str(selectedTrip.price))
     #     self.seatCountInput.textChanged.connect(self.updateTotalPrice)
     # def updateTotalPrice(self):
     #     numofseats = self.seatCountInput.text()
