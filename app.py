@@ -125,7 +125,7 @@ class SignupScreen(QDialog):
 
     def uniqueEmail(self, mail):
         unique = True
-        for i in db.selectAll("Account", f"email ='{mail}'"):
+        if db.count("Account", f"email ='{mail}'") == 1:
             unique = False
         return unique
 
