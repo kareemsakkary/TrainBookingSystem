@@ -15,6 +15,7 @@ db = databaseSQL.database()
 
 loggedInUser = models.Account()
 selectedTrain = models.Train()
+selected = False
 
 
 class SplashScreen(QSplashScreen):
@@ -43,7 +44,7 @@ class MainScreen(QMainWindow):
     def gotologin(self):
         login = LoginScreen()
         widget.addWidget(login)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def gotosignup(self):
         signup = SignupScreen()
@@ -70,7 +71,7 @@ class LoginScreen(QDialog):
             return False
         else:
             self.error.setText("")
-            for row in db.selectAll("Account",f"email ='{email}' and password ='{password}'"):
+            for row in db.selectAll("Account", f"email ='{email}' and password ='{password}'"):
                 loggedInUser.account_id = row.account_id
                 loggedInUser.name = row.name
                 loggedInUser.email = row.email
@@ -116,18 +117,42 @@ class SignupScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success registration!")
+        msg.setText("Signed up successfully!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
+    def uniqueEmail(self, mail):
+        unique = True
+        if db.count("Account", f"email ='{mail}'") == 1:
+            unique = False
+        return unique
+
     def signupfunction(self):
+        # reset error msg
+        self.error.setText("")
+        self.emailError.setText("")
+
         name = self.inputName.text()
         email = self.inputEmail.text()
         password = self.inputPassword.text()
         phoneNum = self.inputNumber.text()
         dob = self.inputDob.text()
         address = self.inputAddress.text()
-        if len(name) == 0 or len(email) == 0 or len(password) == 0 or len(phoneNum) == 0 or len(address) == 0:
+
+        if not self.uniqueEmail(email):
             self.error.setText("")
+            self.errorMsg.setText("")
+            self.emailError.setText("An account is already registered with your email!")
+        elif len(name) == 0 or len(email) == 0 or len(password) == 0 or len(phoneNum) == 0 or len(address) == 0:
+            self.error.setText("")
+            self.emailError.setText("")
             self.errorMsg.setText("Please input all the required fields!")
         # see which is checked, then add it
         elif self.adminRadioButton.isChecked():
+            self.showMessageBox()
             acc = models.Admin()
             acc.name = name
             acc.email = email
@@ -138,6 +163,7 @@ class SignupScreen(QDialog):
             db.addRecord(acc)
             self.returnPrevScreen()
         elif self.customerRadioButton.isChecked():
+            self.showMessageBox()
             acc = models.Customer()
             acc.name = name
             acc.email = email
@@ -166,9 +192,17 @@ class UpdateUserScreen(QDialog):
         self.inputName.setValidator(stringValidator)
         self.inputNumber.setValidator(intValidator)
         self.inputDob.setReadOnly(True)
+        self.inputEmail.setReadOnly(True)
 
     def returnPrevScreen(self):
         widget.removeWidget(self)
+
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success changes!")
+        msg.setText("Profile updated successfully!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
 
     def loadUserInfo(self):
         # extract the date
@@ -191,6 +225,7 @@ class UpdateUserScreen(QDialog):
         self.customerRadioButton.setEnabled(False)
 
     def updateuserfunction(self):
+        self.showMessageBox()
         acc = models.Account()
         acc.account_id = loggedInUser.account_id
         acc.name = self.inputName.text()
@@ -226,14 +261,23 @@ class AddTrainScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success addition!")
+        msg.setText("Train added successfully!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
     def addtrainfunction(self):
         cap = self.inputCapacity.text()
         numOfCart = self.inputNumofcart.text()
         manufacture = self.inputManufacturer.text()
         if len(cap) == 0 or len(numOfCart) == 0 or len(
-                manufacture) == 0 or (not self.activeRadioButton.isChecked() and not self.inactiveRadioButton.isChecked()):
+                manufacture) == 0 or (
+                not self.activeRadioButton.isChecked() and not self.inactiveRadioButton.isChecked()):
             self.error.setText("Please input all the required fields!")
         else:
+            self.showMessageBox()
             train = models.Train()
             train.capacity = int(cap)
             train.no_of_cart = int(numOfCart)
@@ -263,6 +307,8 @@ class ShowAllTrains(QDialog):
         self.tableWidget.cellClicked.connect(self.getClickedCell)
 
     def clearSelected(self):
+        global selected
+        selected = False
         # reset the selected train data to none
         selectedTrain.train_id = ""
         selectedTrain.status = ""
@@ -271,6 +317,8 @@ class ShowAllTrains(QDialog):
         selectedTrain.no_of_cart = ""
 
     def getClickedCell(self, row):
+        global selected
+        selected = True
         # move the clicked row data to update train screen
         selectedTrain.train_id = self.tableWidget.item(row, 0).text()
         selectedTrain.capacity = self.tableWidget.item(row, 1).text()
@@ -294,9 +342,13 @@ class ShowAllTrains(QDialog):
             tableRow += 1
 
     def gotoupdatetrain(self):
-        updateTrain = UpdateTrainScreen()
-        widget.addWidget(updateTrain)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
+        if selected:
+            self.error.setText("")
+            updateTrain = UpdateTrainScreen()
+            widget.addWidget(updateTrain)
+            widget.setCurrentIndex(widget.currentIndex() + 1)
+        else:
+            self.error.setText("Please select a train to update!")
 
 
 class UpdateTrainScreen(QDialog):
@@ -313,7 +365,16 @@ class UpdateTrainScreen(QDialog):
         self.inputNumofcart.setValidator(intValidator)
         self.inputManufacturer.setValidator(stringValidator)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success changes!")
+        msg.setText("Train updated successfully!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
     def clearSelected(self):
+        global selected
+        selected = False
         # reset the selected train data to none
         selectedTrain.train_id = ""
         selectedTrain.status = ""
@@ -338,9 +399,11 @@ class UpdateTrainScreen(QDialog):
         numOfCart = self.inputNumofcart.text()
         manufacture = self.inputManufacturer.text()
         if len(cap) == 0 or len(numOfCart) == 0 or len(
-                manufacture) == 0 or (not self.activeRadioButton.isChecked() and not self.inactiveRadioButton.isChecked()):
+                manufacture) == 0 or (
+                not self.activeRadioButton.isChecked() and not self.inactiveRadioButton.isChecked()):
             self.error.setText("Cannot update without the required fields!")
         else:
+            self.showMessageBox()
             selectedTrain.capacity = cap
             selectedTrain.no_of_cart = numOfCart
             selectedTrain.manufacture = manufacture

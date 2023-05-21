@@ -393,6 +393,23 @@ color:rgb(180, 0, 0)</string>
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="emailError">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>210</y>
+      <width>341</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Sitka Heading Semibold&quot;;
+color:rgb(180, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
