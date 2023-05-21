@@ -141,6 +141,14 @@ text-align: center;</string>
       <set>AlignCenter</set>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>New Column</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </column>
    </widget>
   </widget>
  </widget>
