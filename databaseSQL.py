@@ -3,7 +3,9 @@ import pyodbc
 import models
 class database:
     def __init__(self):
-        self.connection = pyodbc.connect('DRIVER={SQL Server};Server={TrainBooking.mssql.somee.com};Database=TrainBooking; UID=TrainBookingSys; PWD=123456789',autocommit=True)
+        # self.connection = pyodbc.connect('DRIVER={SQL Server};Server={TrainBooking.mssql.somee.com};Database=TrainBooking; UID=TrainBookingSys; PWD=123456789',autocommit=True)
+    
+        self.connection = pyodbc.connect('DRIVER={SQL Server};Server={mssql-127165-0.cloudclusters.net,16286};Database=TrainBooking; UID=sakkary; PWD=Kareem20210301',autocommit=True)
         
     def addRecord(self,data):
         cursor = self.connection.cursor()
