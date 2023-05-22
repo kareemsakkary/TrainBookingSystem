@@ -152,7 +152,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>270</y>
+      <y>300</y>
       <width>41</width>
       <height>21</height>
      </rect>
@@ -161,7 +161,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>fromtoicon-1.png</pixmap>
+     <pixmap>../img/fromtoicon-1.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

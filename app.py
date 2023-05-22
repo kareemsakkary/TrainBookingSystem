@@ -656,19 +656,27 @@ class BookTripScreen(QDialog):
     def booktripfunction(self):
         numofseats = self.seatCountInput.text()
 
-        # if int(numofseats) > db.count("Seat",f"status = 'available' and trip_id = '{selectedTrip.trip_id}';"):
-        #     self.error.setText("")
-        #     self.errorMsg.setText("")
-        #     self.errorMsg.setText("Not enough seats!")
-        # else:
-        book = models.Booking()
-        book.trip = selectedTrip
-        book.account = loggedInUser
-        book.set_seats_num(int(numofseats))
-        db.addRecord(book)
-        self.showMessageBox()
-        self.returnPrevScreen()
-        self.clearSelected()
+        if int(numofseats) > db.count("Seat",f"status = 'available' and trip_id = '{selectedTrip.trip_id}';"):
+            self.error.setText("")
+            self.errorMsg.setText("")
+            self.errorMsg.setText("Not enough seats!")
+        elif db.selectAll("Booking", f"account_id = '{loggedInUser.account_id}' and trip_id = '{selectedTrip.trip_id}'"):
+            booking = db.selectAll("Booking", f"account_id = '{loggedInUser.account_id}' and trip_id = '{selectedTrip.trip_id}'")[0]
+            booking.set_seats_num(booking.no_of_seats + int(numofseats))
+            db.update(booking)
+            self.showMessageBox()
+            self.clearSelected()
+            self.returnPrevScreen()
+            self.clearSelected()
+        else:
+            book = models.Booking()
+            book.trip = selectedTrip
+            book.account = loggedInUser
+            book.set_seats_num(int(numofseats))
+            db.addRecord(book)
+            self.showMessageBox()
+            self.clearSelected()
+            self.returnPrevScreen()
 class ShowBookings(QDialog):
     def __init__(self):
         super(ShowBookings, self).__init__()
@@ -741,7 +749,7 @@ class CancelTripScreen(QDialog):
         if seatsToCancel > int(selectedBooking.no_of_seats):
             self.errorMsg.setText("Not enough seats!")
         elif seatsToCancel == int(selectedBooking.no_of_seats):
-            db.deleteRecord("Booking",f"booking_id = '{selectedBooking.booking_id}'")
+            db.deleteRecord(selectedBooking)
             self.MsgBox()
             self.returnPrevScreen()
 
