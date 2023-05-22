@@ -364,6 +364,7 @@ class UpdateTrainScreen(QDialog):
         self.inputCapacity.setValidator(intValidator)
         self.inputNumofcart.setValidator(intValidator)
         self.inputManufacturer.setValidator(stringValidator)
+        self.inputCapacity.setReadOnly(True)
 
     def showMessageBox(self):
         msg = QMessageBox()
