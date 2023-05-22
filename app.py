@@ -484,6 +484,10 @@ class UpdateTripScreen(QDialog):
         loadUi("ui/UpdateTrip.ui", self)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.updateTripButton.clicked.connect(self.updatetripfunction)
+        startDate = datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S')
+        endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M:%S')
+        self.inputStartDate.setMinimumDateTime(startDate)
+        self.inputEndDate.setMinimumDateTime(endDate)
         self.loadTripInfo()
         intValidator = QtGui.QIntValidator()
         floatValidator = QtGui.QDoubleValidator()
@@ -513,9 +517,6 @@ class UpdateTripScreen(QDialog):
         endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M:%S')
         self.inputStartDate.setDateTime(startDate)
         self.inputEndDate.setDateTime(endDate)
-        current_date = datetime.now()
-        self.inputStartDate.setMinimumDateTime(QDateTime(current_date))
-        self.inputEndDate.setMinimumDateTime(QDateTime(current_date))
 
     def updatetripfunction(self):
         price = self.inputPrice.text()
@@ -526,8 +527,6 @@ class UpdateTripScreen(QDialog):
         enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
         if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
             self.error.setText("Cannot add without the required fields!")
-        elif not db.count("Train", f"train_id ='{trainID}'") == 1:
-            self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
             self.error.setText("Start date must be before end date!")
         else:
@@ -541,7 +540,6 @@ class UpdateTripScreen(QDialog):
             self.showMessageBox()
             self.returnPrevScreen()
             widget.removeWidget(widget.currentWidget())
-
 
 
 class ShowAllTrips(QDialog):
