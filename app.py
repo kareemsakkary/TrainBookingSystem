@@ -728,7 +728,7 @@ class ShowBookings(QDialog):
         selectedTrip.price = db.selectAll("Trip",f"trip_id = '{selectedTrip.trip_id}'")[0].price
         self.gotocanceltrip()
     def gotocanceltrip(self):
-        if selectedTrip.startdate < datetime.datetime.now():
+        if datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S') < datetime.now():
             self.error.setText("You can't cancel a trip that already started!")
         else:
             widget.removeWidget(self)
@@ -901,22 +901,23 @@ class UserOptionsScreen(QDialog):
         loadUi("ui/userOptions.ui", self)
         self.updateInfoButton.clicked.connect(self.gotoupdateInfo)
         self.bookButton.clicked.connect(self.gotobooktrip)
-        # self.cancelButton.clicked.connect(self.gotocanceltrip)
+        self.tripsButton.clicked.connect(self.gototrips)
         self.findTripButton.clicked.connect(self.gotofindtrip)
         self.returnButton.clicked.connect(self.returnPrevScreen)
 
     def returnPrevScreen(self):
         widget.removeWidget(self)
 
+    def gototrips(self):
+        cancelTrip = ShowBookings()
+        widget.addWidget(cancelTrip)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
     def gotobooktrip(self):
         bookTrip = ShowAllTrips()
         widget.addWidget(bookTrip)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    def gotocanceltrip(self):
-        cancelTrip = ShowBookings()
-        widget.addWidget(cancelTrip)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def gotoupdateInfo(self):
         updateInfo = UpdateUserScreen()
