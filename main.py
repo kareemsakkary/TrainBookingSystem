@@ -12,7 +12,7 @@ db = databaseSQL.database()
 # db.addRecord(booking)
 # db.deleteRecord("Trip","trip_id = 3")
 
-# for i in db.getTrips(5):
-#     print(i.departure_station,i.trip_id)
-for i in db.getTrips(5,arrival_station="cai" ,departure_station="  alex"):
-    print(i.trip_id)
+booking:models.Booking = db.selectAll("Booking","booking_id = 12")[0]
+print(booking.no_of_seats)
+booking.set_seats_num(3)
+db.update(booking)

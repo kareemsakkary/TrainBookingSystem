@@ -128,11 +128,11 @@ class database:
                 sql=""""""
                 if(deff < 0):
                     sql = f"""
-                    UPDATE TOP({deff}) Seat SET status = 'available' WHERE trip_id = {data.trip.trip_id} AND status = 'booked';
+                    UPDATE TOP({abs(deff)}) Seat SET status = 'available' WHERE trip_id = {data.trip.trip_id} AND status = 'booked';
                     """
                 elif(deff > 0):
                     sql = f"""
-                    UPDATE TOP({deff}) Seat SET status = 'booked' WHERE trip_id = {data.trip.trip_id} AND status = 'available';
+                    UPDATE TOP({abs(deff)}) Seat SET status = 'booked' WHERE trip_id = {data.trip.trip_id} AND status = 'available';
                     """
                 cursor.execute(sql)
         sql = f"""

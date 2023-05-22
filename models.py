@@ -142,5 +142,10 @@ class Booking:
     def set_seats_num(self,num):
         self.no_of_seats = num
         self.price = self.trip.price * self.no_of_seats
+    def update(self) -> str:
+        st = f"""
+        no_of_seats = '{self.no_of_seats}';
+        """
+        return st
     def key(self) ->str:
         return f'booking_id = {self.booking_id}'
