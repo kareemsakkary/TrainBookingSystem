@@ -75,6 +75,14 @@ class database:
         """
         cursor.execute(sql)
         
+    def cancelBooking(self,booking):
+        self.deleteRecord("Booking",f"booking_id = {booking.booking_id}")
+        cursor = self.connection.cursor()
+        sql = f"""
+            UPDATE TOP({booking.no_of_seats}) Seat SET status = 'available' WHERE trip_id = {booking.trip.trip_id} AND status = 'booked';
+        """
+        cursor.execute(sql)
+
     def selectAll(self,tablename,where=None):
         cursor = self.connection.cursor()
         sql = ""
