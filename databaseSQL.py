@@ -68,20 +68,18 @@ class database:
             trip.train= self.selectAll("Train",f"train_id = '{row[1]}'")[0]
         return trip
 
-    def deleteRecord(self,tableName,where):
+    def deleteRecord(self,data):
         cursor = self.connection.cursor()
         sql = f"""
-        DELETE FROM {tableName} WHERE {where};
+        DELETE FROM {data.table} WHERE {data.key()};
         """
         cursor.execute(sql)
-        
-    def cancelBooking(self,booking):
-        self.deleteRecord("Booking",f"booking_id = {booking.booking_id}")
-        cursor = self.connection.cursor()
-        sql = f"""
-            UPDATE TOP({booking.no_of_seats}) Seat SET status = 'available' WHERE trip_id = {booking.trip.trip_id} AND status = 'booked';
-        """
-        cursor.execute(sql)
+        if(data.table == 'booking'):
+            cursor = self.connection.cursor()
+            sql = f"""
+                UPDATE TOP({data.no_of_seats}) Seat SET status = 'available' WHERE trip_id = {data.trip.trip_id} AND status = 'booked';
+            """
+            cursor.execute(sql)
 
     def selectAll(self,tablename,where=None):
         cursor = self.connection.cursor()
@@ -122,6 +120,21 @@ class database:
     
     def update(self,data):
         cursor = self.connection.cursor()
+        if(data.table == 'Booking'):
+            old_booking = self.selectAll('Booking',data.key())[0]
+            deff = data.no_of_seats-old_booking.no_of_seats
+            if(deff!=0):
+                cursor = self.connection.cursor()
+                sql=""""""
+                if(deff < 0):
+                    sql = f"""
+                    UPDATE TOP({deff}) Seat SET status = 'available' WHERE trip_id = {data.trip.trip_id} AND status = 'booked';
+                    """
+                elif(deff > 0):
+                    sql = f"""
+                    UPDATE TOP({deff}) Seat SET status = 'booked' WHERE trip_id = {data.trip.trip_id} AND status = 'available';
+                    """
+                cursor.execute(sql)
         sql = f"""
             UPDATE {data.table} SET {data.update()};
         """
