@@ -657,9 +657,7 @@ class BookTripScreen(QDialog):
         numofseats = self.seatCountInput.text()
 
         if int(numofseats) > db.count("Seat",f"status = 'available' and trip_id = '{selectedTrip.trip_id}';"):
-            self.error.setText("")
-            self.errorMsg.setText("")
-            self.errorMsg.setText("Not enough seats!")
+            self.error.setText("Not enough seats!")
         elif db.selectAll("Booking", f"account_id = '{loggedInUser.account_id}' and trip_id = '{selectedTrip.trip_id}'"):
             booking = db.selectAll("Booking", f"account_id = '{loggedInUser.account_id}' and trip_id = '{selectedTrip.trip_id}'")[0]
             booking.set_seats_num(booking.no_of_seats + int(numofseats))
@@ -720,9 +718,12 @@ class ShowBookings(QDialog):
         selectedTrip.price = db.selectAll("Trip",f"trip_id = '{selectedTrip.trip_id}'")[0].price
         self.gotocanceltrip()
     def gotocanceltrip(self):
-        widget.removeWidget(self)
-        widget.addWidget(CancelTripScreen())
-        widget.setCurrentIndex(widget.currentIndex() + 1)
+        if selectedTrip.startdate < datetime.datetime.now():
+            self.error.setText("You can't cancel a trip that already started!")
+        else:
+            widget.removeWidget(self)
+            widget.addWidget(CancelTripScreen())
+            widget.setCurrentIndex(widget.currentIndex() + 1)
 
 
 

@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>720</y>
+      <y>730</y>
       <width>351</width>
       <height>51</height>
      </rect>
@@ -384,6 +384,29 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">background-color: white;
 border-radius: 20px;
 font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="error">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>680</y>
+      <width>591</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Sitka Heading Semibold&quot;;
+color:rgb(180, 0, 0)</string>
     </property>
     <property name="text">
      <string/>

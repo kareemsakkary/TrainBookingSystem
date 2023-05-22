@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>80</y>
+      <y>40</y>
       <width>151</width>
       <height>61</height>
      </rect>
@@ -49,8 +49,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="returnButton">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>760</y>
+      <x>610</x>
+      <y>780</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -173,6 +173,46 @@ text-align: center;</string>
       <set>AlignCenter</set>
      </property>
     </column>
+   </widget>
+   <widget class="QLabel" name="instructionLabel">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>130</y>
+      <width>351</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20 15pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>double click the trip to cancel it</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="error">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>710</y>
+      <width>591</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Sitka Heading Semibold&quot;;
+color:rgb(180, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
   </widget>
  </widget>
