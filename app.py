@@ -462,8 +462,6 @@ class AddTripScreen(QDialog):
             self.error.setText("Cannot add without the required fields!")
         elif not db.count("Train", f"train_id ='{trainID}'") == 1:
             self.error.setText("Train ID doesn't exist!")
-        elif db.selectAll("Train" , f"train_id = '{int(trainID)}'")[0] is None:
-            self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
             self.error.setText("Start date must be before end date!")
         else:
