@@ -460,7 +460,8 @@ class AddTripScreen(QDialog):
         enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
         if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
             self.error.setText("Cannot add without the required fields!")
-
+        elif not db.count("Train", f"train_id ='{trainID}'") == 1:
+            self.error.setText("Train ID doesn't exist!")
         elif db.selectAll("Train" , f"train_id = '{int(trainID)}'")[0] is None:
             self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
