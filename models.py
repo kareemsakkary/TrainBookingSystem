@@ -50,8 +50,7 @@ class Train:
         self.capacity = row[1]
         self.status = row[2]
         self.no_of_cart = row[3]
-        self.manufacture = row[4]
-        
+        self.manufacture = row[4]     
     def add(self) -> str:
         table= 'Train(capacity,status,no_of_carts,manufacturer)'
         values =f"VALUES({self.capacity},'{self.status}','{self.no_of_cart}','{self.manufacture}');"
@@ -105,6 +104,7 @@ class Trip:
         self.start_date = start
         self.end_date = end
         return end-start
+
 class Seat:
     def __init__(self,row=[None,None,None]) -> None:
         self.table = "Seat"

@@ -100,7 +100,7 @@ class database:
                 li.append(models.Seat(row))
             elif(tablename=="Booking"):
                 booking = models.Booking(row)
-                booking.trip = self.selectAll("Trip",f"trip = {row[2]};")[0]
+                booking.trip = self.selectAll("Trip",f"trip_id = {row[2]};")[0]
                 booking.account = self.selectAll("Account",f"account = {row[1]};")[0]
                 li.append(booking)
         return li

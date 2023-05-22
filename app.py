@@ -484,8 +484,6 @@ class UpdateTripScreen(QDialog):
         super(UpdateTripScreen, self).__init__()
         # load UI
 
-
-
 class ShowAllTrips(QDialog):
     def __init__(self):
         super(ShowAllTrips, self).__init__()
@@ -606,7 +604,6 @@ class CancelTripScreen(QDialog):
     def __init__(self):
         super(CancelTripScreen, self).__init__()
         # load UI
-
 
 class ShowMatchingTripsScreen(QDialog):
     def __init__(self):
