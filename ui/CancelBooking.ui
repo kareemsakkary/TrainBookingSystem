@@ -275,7 +275,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>630</y>
+      <y>620</y>
       <width>91</width>
       <height>51</height>
      </rect>
@@ -423,7 +423,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>640</y>
+      <y>630</y>
       <width>471</width>
       <height>41</height>
      </rect>
@@ -434,6 +434,26 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Enter number of seats you want to cancel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="error">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>690</y>
+      <width>441</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Sitka Heading Semibold&quot;;
+color:rgb(180, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
