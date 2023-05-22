@@ -621,6 +621,7 @@ class BookTripScreen(QDialog):
         intValidator = QtGui.QIntValidator()
         txtRegex = QRegExp("[a-zA-Z]+")
         stringValidator = QRegExpValidator(txtRegex)
+        self.seatCountInput.textChanged.connect(self.updateTotalPrice)
 
     def clearSelected(self):
         # reset the selected train data to none
@@ -639,13 +640,13 @@ class BookTripScreen(QDialog):
         self.startDateLabel.setText(selectedTrip.start_date)
         self.endDateLabel.setText(selectedTrip.end_date)
         self.totalPriceLabel.setText(str(selectedTrip.price))
-    #     self.seatCountInput.textChanged.connect(self.updateTotalPrice)
-    # def updateTotalPrice(self):
-    #     numofseats = self.seatCountInput.text()
-    #     if len(numofseats) == 0:
-    #         self.totalPriceLabel.setText("0")
-    #     else:
-    #         self.totalPriceLabel.setText(str(int(numofseats) * int(selectedTrip.price)))
+
+    def updateTotalPrice(self):
+        numofseats = self.seatCountInput.text()
+        if len(numofseats) == 0:
+            self.totalPriceLabel.setText("0")
+        else:
+            self.totalPriceLabel.setText(str(int(numofseats) * int(selectedTrip.price)))
     def showMessageBox(self):
         msg = QMessageBox()
         msg.setWindowTitle("Success Booking!")
