@@ -14,3 +14,5 @@ db = databaseSQL.database()
 
 for i in db.getTrips(5):
     print(i.departure_station,i.trip_id)
+for i in db.selectAll("Booking"):
+    print(i.trip_id)

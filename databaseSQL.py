@@ -101,7 +101,7 @@ class database:
             elif(tablename=="Booking"):
                 booking = models.Booking(row)
                 booking.trip = self.selectAll("Trip",f"trip_id = {row[2]};")[0]
-                booking.account = self.selectAll("Account",f"account = {row[1]};")[0]
+                booking.account = self.selectAll("Account",f"account_id = {row[1]};")[0]
                 li.append(booking)
         return li
     
@@ -131,7 +131,7 @@ class database:
             sql += f"AND Trip.start_date = '{start_date}' "
         if(end_date):
             sql += f"AND Trip.end_date = '{end_date}' "
-        sql += f"""GROUP BY Trip.trip_id ,Trip.train_id,Trip.price,Trip.start_date,Trip.end_date , Trip.departure_station, Trip.arrival_station
+        sql += f"""GROUP BY Trip.trip_id ,Trip.train_id,Trip.price,Trip.start_date,Trip.end_date,Trip.departure_station,Trip.arrival_station
                 HAVING COUNT(Seat_id) > {seats};"""
         li =[]
         print(sql)
