@@ -29,11 +29,11 @@
 
 }</string>
    </property>
-   <widget class="QPushButton" name="bookTripButton">
+   <widget class="QPushButton" name="cancelButton">
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>720</y>
+      <y>730</y>
       <width>351</width>
       <height>51</height>
      </rect>
@@ -52,7 +52,7 @@ QPushButton:hover{
 }</string>
     </property>
     <property name="text">
-     <string>Book This Trip</string>
+     <string>Cancel These Tickets</string>
     </property>
     <property name="default">
      <bool>false</bool>
@@ -96,7 +96,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>370</y>
+      <y>320</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -112,7 +112,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="returnButton">
     <property name="geometry">
      <rect>
-      <x>620</x>
+      <x>600</x>
       <y>780</y>
       <width>141</width>
       <height>41</height>
@@ -139,7 +139,7 @@ QPushButton:hover{
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>370</y>
+      <y>320</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -156,7 +156,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>270</y>
+      <y>240</y>
       <width>221</width>
       <height>51</height>
      </rect>
@@ -183,7 +183,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>270</y>
+      <y>240</y>
       <width>221</width>
       <height>51</height>
      </rect>
@@ -204,7 +204,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>440</y>
+      <y>370</y>
       <width>221</width>
       <height>51</height>
      </rect>
@@ -231,7 +231,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>440</y>
+      <y>370</y>
       <width>221</width>
       <height>51</height>
      </rect>
@@ -254,12 +254,12 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="seatsCountLabel">
+   <widget class="QLabel" name="labelSeats">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>540</y>
-      <width>81</width>
+      <x>460</x>
+      <y>450</y>
+      <width>201</width>
       <height>41</height>
      </rect>
     </property>
@@ -268,15 +268,15 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Seats</string>
+     <string>Seats Booked</string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="seatCountInput">
+   <widget class="QSpinBox" name="inputSeatsCount">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>610</y>
-      <width>221</width>
+      <x>550</x>
+      <y>630</y>
+      <width>91</width>
       <height>51</height>
      </rect>
     </property>
@@ -292,7 +292,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 20px;</string>
+     <string notr="true">border-radius: 15px;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -352,7 +352,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>540</y>
+      <y>450</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -369,7 +369,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>610</y>
+      <y>510</y>
       <width>221</width>
       <height>51</height>
      </rect>
@@ -390,6 +390,50 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="seatsCountLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>510</y>
+      <width>221</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>90</horstretch>
+      <verstretch>90</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+border-radius: 20px;
+font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="instructionLabel">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>640</y>
+      <width>471</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20 15pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Enter number of seats you want to cancel</string>
     </property>
    </widget>
   </widget>

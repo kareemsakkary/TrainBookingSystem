@@ -5,9 +5,9 @@ import time
 import databaseSQL
 import models
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import Qt, QRegExp, QDate, QDateTime
+from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from datetime import datetime
 
@@ -17,6 +17,8 @@ loggedInUser = models.Account()
 selectedTrain = models.Train()
 selected = False
 selectedTrip = models.Trip()
+selectedBooking = models.Booking()
+matchingTrips = []
 
 class SplashScreen(QSplashScreen):
     def __init__(self):
@@ -428,6 +430,10 @@ class AddTripScreen(QDialog):
         loadUi("ui/AddTrip.ui", self)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.addTripButton.clicked.connect(self.addtripfunction)
+        self.inputStartDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
+        self.inputEndDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
+        self.inputStartDate.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.inputEndDate.setDateTime(QtCore.QDateTime.currentDateTime())
 
         intValidator = QtGui.QIntValidator()
         floatValidator = QtGui.QDoubleValidator()
@@ -446,24 +452,24 @@ class AddTripScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
     def addtripfunction(self):
-        price = float(self.inputPrice.text())
+        price = self.inputPrice.text()
         departure = self.inputDepartureStation.text()
         arrival = self.inputArrivalStation.text()
-        trainID = self.inputTrainID.text()
-        startdate = self.inputStartDate.dateTime().toPyDateTime()
-        enddate = self.inputEndDate.dateTime().toPyDateTime()
-        train = db.selectAll("Train" , f"train_id = '{trainID}'")[0]
+        trainID =self.inputTrainID.text()
+        startdate = self.inputStartDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
+        enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
         if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
             self.error.setText("Cannot add without the required fields!")
-        #check train id exist
-        elif train is None:
+
+        elif db.selectAll("Train" , f"train_id = '{int(trainID)}'")[0] is None:
             self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
             self.error.setText("Start date must be before end date!")
         else:
+            train = db.selectAll("Train" , f"train_id = '{int(trainID)}'")[0]
             trip = models.Trip()
             trip.train = train
-            trip.price = price
+            trip.price = float(price)
             trip.departure_station = departure
             trip.arrival_station = arrival
             trip.start_date = startdate
@@ -479,6 +485,8 @@ class UpdateTripScreen(QDialog):
         loadUi("ui/UpdateTrip.ui", self)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.updateTripButton.clicked.connect(self.updatetripfunction)
+        self.inputStartDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
+        self.inputEndDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
         self.loadTripInfo()
         intValidator = QtGui.QIntValidator()
         floatValidator = QtGui.QDoubleValidator()
@@ -502,8 +510,17 @@ class UpdateTripScreen(QDialog):
         self.inputDepartureStation.setText(selectedTrip.departure_station)
         self.inputArrivalStation.setText(selectedTrip.arrival_station)
         self.inputTrainID.setText(str(selectedTrip.train.train_id))
-        self.inputStartDate.setDateTime(QDateTime.fromString(selectedTrip.start_date))
-        self.inputEndDate.setDateTime(QDateTime.fromString(selectedTrip.end_date))
+
+        def loadTripInfo(self):
+            self.inputPrice.setText(str(selectedTrip.price))
+            self.inputDepartureStation.setText(selectedTrip.departure_station)
+            self.inputArrivalStation.setText(selectedTrip.arrival_station)
+            self.inputTrainID.setText(str(selectedTrip.train.train_id))
+            startDate = QtCore.QDateTime.fromString(selectedTrip.start_date, "yyyy-MM-dd HH:mm:ss")
+            endDate = QtCore.QDateTime.fromString(selectedTrip.end_date, "yyyy-MM-dd HH:mm:ss")
+            self.inputStartDate.setDateTime(startDate)
+            self.inputEndDate.setDateTime(endDate)
+
     def updatetripfunction(self):
         price = float(self.inputPrice.text())
         departure = self.inputDepartureStation.text()
@@ -531,6 +548,8 @@ class UpdateTripScreen(QDialog):
             self.showMessageBox()
             widget.removeWidget(widget.currentWidget())
 
+
+
 class ShowAllTrips(QDialog):
     def __init__(self):
         super(ShowAllTrips, self).__init__()
@@ -552,7 +571,6 @@ class ShowAllTrips(QDialog):
             selectedTrip.trip_id = self.tableWidget.item(row, 0).text()
             selectedTrip.departure_station = self.tableWidget.item(row, 1).text()
             selectedTrip.arrival_station = self.tableWidget.item(row, 2).text()
-            # print(self.tableWidget.item(row, 3).text())
             selectedTrip.price = float(self.tableWidget.item(row, 3).text())
             selectedTrip.start_date = self.tableWidget.item(row, 4).text()
             selectedTrip.end_date = self.tableWidget.item(row, 5).text()
@@ -650,87 +668,160 @@ class BookTripScreen(QDialog):
         self.showMessageBox()
         self.returnPrevScreen()
         self.clearSelected()
+class ShowBookings(QDialog):
+    def __init__(self):
+        super(ShowBookings, self).__init__()
+        # load UI
+        loadUi("ui/ShowBookings.ui", self)
+        #make coulmn width fit the content
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.tableWidget.setHorizontalHeaderLabels(["Booking ID", "Departure Station", "Arrival Station", "Departure Date", "Arrival Date","Seat Count" , "Price","Train ID", "Trip ID"])
+        self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
+        self.loadBookings()
+        self.returnButton.clicked.connect(self.returnPrevScreen)
+        self.tableWidget.doubleClicked.connect(self.getClickedCell)
+    def returnPrevScreen(self):
+        widget.removeWidget(self)
+    def loadBookings(self):
+        self.tableWidget.setRowCount(db.count("Booking",f"account_id = '{loggedInUser.account_id}'"))
+        tableRow = 0
+        for row in db.selectAll("Booking",f"account_id = '{loggedInUser.account_id}'"):
+            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.booking_id)))
+            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.trip.departure_station))
+            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.trip.arrival_station))
+            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.trip.start_date)))
+            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row.trip.end_date)))
+            self.tableWidget.setItem(tableRow, 5, QtWidgets.QTableWidgetItem(str(row.no_of_seats)))
+            self.tableWidget.setItem(tableRow, 6, QtWidgets.QTableWidgetItem(str(row.price)))
+            self.tableWidget.setItem(tableRow, 7, QtWidgets.QTableWidgetItem(str(row.trip.train.train_id)))
+            self.tableWidget.setItem(tableRow, 8, QtWidgets.QTableWidgetItem(str(row.trip.trip_id)))
+            tableRow += 1
+
+    def getClickedCell(self):
+        selectedRow = self.tableWidget.currentRow()
+        selectedBooking.booking_id = self.tableWidget.item(selectedRow, 0).text()
+        selectedTrip.trip_id = self.tableWidget.item(selectedRow, 8).text()
+        selectedTrip.departure_station = self.tableWidget.item(selectedRow, 1).text()
+        selectedTrip.arrival_station = self.tableWidget.item(selectedRow, 2).text()
+        selectedTrip.start_date = self.tableWidget.item(selectedRow, 3).text()
+        selectedTrip.end_date = self.tableWidget.item(selectedRow, 4).text()
+        selectedBooking.no_of_seats = self.tableWidget.item(selectedRow, 5).text()
+        selectedBooking.price = self.tableWidget.item(selectedRow, 6).text()
+        selectedTrip.train_id = self.tableWidget.item(selectedRow, 7).text()
+        selectedTrip.price = db.selectAll("Trip",f"trip_id = '{selectedTrip.trip_id}'")[0].price
+        self.gotocanceltrip()
+    def gotocanceltrip(self):
+        widget.removeWidget(self)
+        widget.addWidget(CancelTripScreen())
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+
+
 
 class CancelTripScreen(QDialog):
     def __init__(self):
         super(CancelTripScreen, self).__init__()
-        # load UI
+        loadUi("ui/CancelBooking.ui", self)
+        self.cancelButton.clicked.connect(self.cancelBooking)
+        self.returnButton.clicked.connect(self.returnPrevScreen)
+        self.loadBookingInfo()
+    def returnPrevScreen(self):
+        widget.removeWidget(self)
+    def loadBookingInfo(self):
+        self.departureStationLabel.setText(selectedTrip.departure_station)
+        self.arrivalStationLabel.setText(selectedTrip.arrival_station)
+        self.startDateLabel.setText(str(selectedTrip.start_date))
+        self.endDateLabel.setText(str(selectedTrip.end_date))
+        self.seatsCountLabel.setText(str(selectedBooking.no_of_seats))
+        self.totalPriceLabel.setText(str(selectedBooking.price))
+        self.inputSeatsCount.setMaximum(int(selectedBooking.no_of_seats))
+    def cancelBooking(self):
+        seatsToCancel = int(self.inputSeatsCount.text())
+        if seatsToCancel > int(selectedBooking.no_of_seats):
+            self.errorMsg.setText("Not enough seats!")
+        elif seatsToCancel == int(selectedBooking.no_of_seats):
+            db.deleteRecord("Booking",f"booking_id = '{selectedBooking.booking_id}'")
+            self.MsgBox()
+            self.returnPrevScreen()
+
+        else:
+            selectedBooking.account = loggedInUser
+            selectedBooking.trip = selectedTrip
+            selectedBooking.no_of_seats = int(selectedBooking.no_of_seats) - seatsToCancel
+            selectedBooking.price = float(selectedBooking.price) - (seatsToCancel * int(selectedBooking.trip.price))
+            db.update(selectedBooking)
+            self.MsgBox()
+            self.returnPrevScreen()
+    def MsgBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success")
+        msg.setText("Booking canceled successfully!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
 
 class ShowMatchingTripsScreen(QDialog):
     def __init__(self):
         super(ShowMatchingTripsScreen, self).__init__()
         # load UI
         loadUi("ui/ShowTrips.ui", self)
-        model = QStandardItemModel(0, 5)
-        model.setHorizontalHeaderLabels(
-            ["Departure Station", "Arrival Station", "Price", "Start Date", "End Date"])
-        self.returnButton.clicked.connect(self.returnPrevScreen)
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.tableWidget.setHorizontalHeaderLabels(
+            ["Trip Id", "Departure Station", "Arrival Station", "Price", "Start Date", "End Date", "Train ID"])
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.loadTrips()
-        self.selectTripButton.clicked.connect(self.gotobooktrip)
-        self.tableWidget.cellClicked.connect(self.getClickedCell)
+        self.returnButton.clicked.connect(self.returnPrevScreen)
+        self.tableWidget.doubleClicked.connect(self.getClickedCell)
+
+    def getClickedCell(self, index):
+        row = index.row()
+        column = index.column()
+
+        if column >= 0:
+            selectedTrip.trip_id = self.tableWidget.item(row, 0).text()
+            selectedTrip.departure_station = self.tableWidget.item(row, 1).text()
+            selectedTrip.arrival_station = self.tableWidget.item(row, 2).text()
+            selectedTrip.price = float(self.tableWidget.item(row, 3).text())
+            selectedTrip.start_date = self.tableWidget.item(row, 4).text()
+            selectedTrip.end_date = self.tableWidget.item(row, 5).text()
+            trainid = int(self.tableWidget.item(row, 6).text())
+            selectedTrip.train = db.selectAll("Train", f"train_id = '{trainid}'")[0]
+            self.action()
 
     def clearSelected(self):
-        # reset the selected trip data to none
+        # reset the selected train data to none
         selectedTrip.departure_station = ""
         selectedTrip.arrival_station = ""
         selectedTrip.price = ""
         selectedTrip.start_date = ""
         selectedTrip.end_date = ""
+        selectedTrip.train = None
 
     def returnPrevScreen(self):
         self.clearSelected()
         widget.removeWidget(self)
 
-    def loadTrips(self, departure_station, arrival_station, departure_date, seats_count):
-        model = QStandardItemModel(0, 5)
-        model.setHorizontalHeaderLabels(
-            ["Departure Station", "Arrival Station", "Price", "Start Date", "End Date"])
-        for i in db.selectAll("Trip",where="departure_station = ? AND arrival_station = ? AND start_date = ? AND capacity >= ?",where_values=[departure_station,arrival_station,departure_date,seats_count]):
-            departure_station = QStandardItem(str(i.departure_station))
-            arrival_station = QStandardItem(str(i.arrival_station))
-            price = QStandardItem(str(i.price))
-            start_date = QStandardItem(str(i.start_date))
-            end_date = QStandardItem(str(i.end_date))
+    def loadTrips(self):
+        self.tableWidget.setRowCount(len(matchingTrips))
+        tableRow = 0
+        for row in matchingTrips:
+            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.trip_id)))
+            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.departure_station))
+            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.arrival_station))
+            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.price)))
+            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row.start_date)))
+            self.tableWidget.setItem(tableRow, 5, QtWidgets.QTableWidgetItem(str(row.end_date)))
+            self.tableWidget.setItem(tableRow, 6, QtWidgets.QTableWidgetItem(str(row.train.train_id)))
+            tableRow += 1
 
-            model.appendRow([departure_station, arrival_station, price, start_date, end_date])
-
-    def getClickedCell(self, row, column):
-        # Retrieve the data from the clicked cell
-        trip_id = self.tableWidget.item(row, 0).text()
-        departure_station = self.tableWidget.item(row, 1).text()
-        arrival_station = self.tableWidget.item(row, 2).text()
-        price = self.tableWidget.item(row, 3).text()
-        start_date = self.tableWidget.item(row, 4).text()
-        end_date = self.tableWidget.item(row, 5).text()
-
-        # Set the selected trip data
-        selectedTrip.departure_station = departure_station
-        selectedTrip.arrival_station = arrival_station
-        selectedTrip.price = price
-        selectedTrip.start_date = start_date
-        selectedTrip.end_date = end_date
-
-    def gotobooktrip(self):
-        # Check if a trip is selected
-        if (
-            selectedTrip.departure_station
-            and selectedTrip.arrival_station
-            and selectedTrip.price
-            and selectedTrip.start_date
-            and selectedTrip.end_date
-        ):
-            # Open the BookSeatsScreen and pass the selected trip data
-            book_seats_screen = BookTripScreen()
-            book_seats_screen.departure_station_label.setText(selectedTrip.departure_station)
-            book_seats_screen.arrival_station_label.setText(selectedTrip.arrival_station)
-            book_seats_screen.price_label.setText(selectedTrip.price)
-            book_seats_screen.start_date_label.setText(selectedTrip.start_date)
-            book_seats_screen.end_date_label.setText(selectedTrip.end_date)
-            widget.addWidget(book_seats_screen)
+    def action(self):
+        if loggedInUser.role == "admin":
+            widget.addWidget(UpdateTripScreen())
             widget.setCurrentIndex(widget.currentIndex() + 1)
         else:
-            QMessageBox.warning(self, "Warning", "Please select a trip.")
+            widget.addWidget(BookTripScreen())
+            widget.setCurrentIndex(widget.currentIndex() + 1)
+
 
 class FindTripScreen(QDialog):
     def __init__(self):
@@ -738,51 +829,17 @@ class FindTripScreen(QDialog):
         # load UI
         loadUi("ui/FindTrip.ui", self)
         self.returnButton.clicked.connect(self.returnPrevScreen)
-        self.findTripButton.clicked.connect(self.findtripfunction)
-        self.loadTripInfo()
-        intValidator = QtGui.QIntValidator()
-        txtRegex = QRegExp("[a-zA-Z]+")
-        dateTimeRegex = QRegExp("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]")
-        stringValidator = QRegExpValidator(txtRegex)
-        self.inputDepartureStation.setValidator(stringValidator)
-        self.inputArrivalStation.setValidator(stringValidator)
-
-
-    def clearSelected(self):
-        # reset the selected trip data to none
-        selectedTrip.departure_station = ""
-        selectedTrip.arrival_station = ""
-        selectedTrip.price = ""
-        selectedTrip.start_date = ""
-        selectedTrip.end_date = ""
-
+        self.findTripButton.clicked.connect(self.findTrip)
     def returnPrevScreen(self):
-        self.clearSelected()
         widget.removeWidget(self)
-
-    def loadTripInfo(self):
-        self.inputDepartureStation.setText(selectedTrip.departure_station)
-        self.inputArrivalStation.setText(selectedTrip.arrival_station)
-        self.inputDateTime.setDateTime(QDateTime.fromString(selectedTrip.start_date, "yyyy-MM-dd HH:mm"))
-
-    def findtripfunction(self):
+    def findTrip(self):
         departure_station = self.inputDepartureStation.text()
         arrival_station = self.inputArrivalStation.text()
-        departure_date = self.inputDateTime.text()
-        seats_count = self.inputSeatsCount.text()
-        # if len(departure_station) == 0 or len(arrival_station) == 0 or len(departure_date) == 0 or len(seats_count) == 0:
-        #     QMessageBox.warning(self, "Warning", "Please fill in all the fields.")
-        # else:
-        show_matching_trips_screen = ShowMatchingTripsScreen()
-        show_matching_trips_screen.loadTrips(
-            departure_station, arrival_station, departure_date, seats_count)
-        ShowMatchingTripsScreen.loadTrips(departure_station, arrival_station, departure_date, seats_count)
-        widget.addWidget(ShowMatchingTripsScreen)
+        start_date = self.inputStartDate.dateTime().toPyDateTime()
+        no_of_seats = int(self.inputSeatsCount.text())
+        matchingTrips.extend(db.getTrips(no_of_seats, arrival_station,departure_station, start_date))
+        widget.addWidget(ShowMatchingTripsScreen())
         widget.setCurrentIndex(widget.currentIndex() + 1)
-
-
-
-
 
 class AdminOptionsScreen(QDialog):
     def __init__(self):
@@ -824,7 +881,7 @@ class UserOptionsScreen(QDialog):
         loadUi("ui/userOptions.ui", self)
         self.updateInfoButton.clicked.connect(self.gotoupdateInfo)
         self.bookButton.clicked.connect(self.gotobooktrip)
-        # self.cancelButton.clicked.connect(self.gotocanceltrip)
+        self.cancelButton.clicked.connect(self.gotocanceltrip)
         self.findTripButton.clicked.connect(self.gotofindtrip)
         self.returnButton.clicked.connect(self.returnPrevScreen)
 
@@ -837,7 +894,7 @@ class UserOptionsScreen(QDialog):
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def gotocanceltrip(self):
-        cancelTrip = CancelTripScreen()
+        cancelTrip = ShowBookings()
         widget.addWidget(cancelTrip)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
