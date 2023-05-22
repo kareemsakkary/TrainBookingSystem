@@ -102,6 +102,7 @@ class database:
                 booking = models.Booking(row)
                 booking.trip = self.selectAll("Trip",f"trip_id = {row[2]};")[0]
                 booking.account = self.selectAll("Account",f"account_id = {row[1]};")[0]
+                booking.set_seats_num(booking.no_of_seats)
                 li.append(booking)
         return li
     

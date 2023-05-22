@@ -12,7 +12,7 @@ db = databaseSQL.database()
 # db.addRecord(booking)
 # db.deleteRecord("Trip","trip_id = 3")
 
-for i in db.getTrips(5):
-    print(i.departure_station,i.trip_id)
+# for i in db.getTrips(5):
+#     print(i.departure_station,i.trip_id)
 for i in db.selectAll("Booking"):
-    print(i.trip_id)
+    print(i.trip.trip_id,i.no_of_seats , i.price)
