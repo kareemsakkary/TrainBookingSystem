@@ -114,3 +114,35 @@ class database:
             UPDATE {data.table} SET {data.update()};
         """
         cursor.execute(sql)
+
+    def getTrips(self,seats,arrival_station=None,departure_station=None,start_date=None,end_date=None):
+        cursor = self.connection.cursor()
+        sql = f"""SELECT Trip.trip_id,Trip.train_id,Trip.price,Trip.start_date,Trip.end_date , Trip.departure_station, Trip.arrival_station,COUNT(Seat.seat_id)
+                FROM Trip,Seat
+                Where
+                Trip.trip_id = Seat.trip_id
+                AND Seat.status = 'available'
+                """
+        if(arrival_station):
+            sql += f"AND Trip.arrival_station = '{arrival_station}' "
+        if(departure_station):
+            sql += f"AND Trip.departure_station = '{departure_station}' "
+        if(start_date):
+            sql += f"AND Trip.start_date = '{start_date}' "
+        if(end_date):
+            sql += f"AND Trip.end_date = '{end_date}' "
+        sql += f"""GROUP BY Trip.trip_id ,Trip.train_id,Trip.price,Trip.start_date,Trip.end_date , Trip.departure_station, Trip.arrival_station
+                HAVING COUNT(Seat_id) > {seats};"""
+        li =[]
+        print(sql)
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        for row in rows:
+            trip = models.Trip(row)
+            trip.train = self.selectAll("Train",f"train_id = '{row[1]}'")[0]
+            trip.seats = self.selectAll("Seat",f"trip_id = '{row[0]}' AND status = 'available'")
+            trip.ETA = trip.end_date-trip.start_date
+            li.append(trip)
+        return li
+
+
