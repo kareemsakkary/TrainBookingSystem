@@ -758,7 +758,7 @@ class CancelTripScreen(QDialog):
     def cancelBooking(self):
         seatsToCancel = int(self.inputSeatsCount.text())
         if seatsToCancel > int(selectedBooking.no_of_seats):
-            self.errorMsg.setText("Not enough seats!")
+            self.error.setText("Not enough seats!")
         elif seatsToCancel == int(selectedBooking.no_of_seats):
             db.deleteRecord(selectedBooking)
             self.MsgBox()
