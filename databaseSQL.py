@@ -86,10 +86,24 @@ class database:
     def selectAll(self,tablename,where=None):
         cursor = self.connection.cursor()
         sql = ""
-        if(where == None):
+        if(tablename == 'Trip'):
+            sql = """select Trip.*,count(Seat.seat_id), Train.*
+            from Trip,Train,Seat where Trip.train_id = Train.train_id AND Seat.trip_id = Trip.trip_id"""
+            if(where):
+                sql += f" AND {where}"
+            sql += """ GROUP BY Trip.Trip_id,Trip.train_id,Trip.price,Trip.start_date,Trip.end_date,Trip.departure_station,Trip.arrival_station,
+                        Train.train_id,Train.capacity,Train.status,Train.no_of_carts,Train.manufacturer"""
+        elif(tablename == 'Booking'):
+            sql = """SELECT Booking.*,Account.*,Trip.*,Train.* FROM Booking,Account,Trip,Train
+            WHERE Account.account_id = Booking.account_id AND Trip.trip_id = Booking.trip_id AND Trip.train_id = Train.train_id
+            """
+            if(where):
+                sql += f" AND {where}"
+        elif(where == None):
             sql = f"""select * from {tablename}"""
         else:
             sql = f"""select * from {tablename} WHERE {where}"""
+        print(sql)
         cursor.execute(sql)
         rows = cursor.fetchall()
         li = []
@@ -103,16 +117,21 @@ class database:
                 li.append(models.Train(row))
             elif(tablename=="Trip"):
                 trip = models.Trip(row)
-                trip.train = self.selectAll("Train",f"train_id = '{row[1]}'")[0]
-                trip.seats = self.selectAll("Seat",f"trip_id = '{row[0]}'")
+                trip.train = models.Train(row[8::])
+                # trip.train = self.selectAll("Train",f"train_id = '{row[1]}'")[0]
+                # trip.seats = self.selectAll("Seat",f"trip_id = '{row[0]}'")
                 trip.ETA = trip.end_date-trip.start_date
                 li.append(trip)
             elif(tablename=="Seat"):
                 li.append(models.Seat(row))
             elif(tablename=="Booking"):
                 booking = models.Booking(row)
-                booking.trip = self.selectAll("Trip",f"trip_id = {row[2]};")[0]
-                booking.account = self.selectAll("Account",f"account_id = {row[1]};")[0]
+                booking.account = models.Account(row[4::])
+                train = models.Train(row[19::])
+                booking.trip = models.Trip(row[12::])
+                booking.trip.train = train
+                # booking.trip = self.selectAll("Trip",f"trip_id = {row[2]};")[0]
+                # booking.account = self.selectAll("Account",f"account_id = {row[1]};")[0]
                 booking.set_seats_num(booking.no_of_seats)
                 li.append(booking)
         return li
@@ -144,7 +163,7 @@ class database:
 
     def getTrips(self,seats,arrival_station=None,departure_station=None,start_date=None,end_date=None):
         cursor = self.connection.cursor()
-        sql = f"""SELECT Trip.trip_id,Trip.train_id,Trip.price,Trip.start_date,Trip.end_date , Trip.departure_station, Trip.arrival_station,COUNT(Seat.seat_id)
+        sql = f"""SELECT Trip.*, COUNT(Seat.seat_id) , Train
                 FROM Trip,Seat
                 Where
                 Trip.trip_id = Seat.trip_id
@@ -159,6 +178,7 @@ class database:
         if(end_date):
             sql += f"AND Trip.end_date = '{end_date}' "
         sql += f"""GROUP BY Trip.trip_id ,Trip.train_id,Trip.price,Trip.start_date,Trip.end_date,Trip.departure_station,Trip.arrival_station
+                ,Train.train_id,Train.capacity,Train.status,Train.no_of_carts,Train.manufacturer
                 HAVING COUNT(Seat_id) > {seats};"""
         li =[]
         print(sql)
@@ -166,8 +186,9 @@ class database:
         rows = cursor.fetchall()
         for row in rows:
             trip = models.Trip(row)
-            trip.train = self.selectAll("Train",f"train_id = '{row[1]}'")[0]
-            trip.seats = self.selectAll("Seat",f"trip_id = '{row[0]}' AND status = 'available'")
+            trip.train = models.Train(row[8::])
+            # trip.train = self.selectAll("Train",f"train_id = '{row[1]}'")[0]
+            # trip.seats = self.selectAll("Seat",f"trip_id = '{row[0]}' AND status = 'available'")
             trip.ETA = trip.end_date-trip.start_date
             li.append(trip)
         return li

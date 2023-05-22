@@ -30,5 +30,5 @@ db = databaseSQL.database()
 #
 # # for i in db.getTrips(1,arrival_station="dahab",departure_station="cairo"):
 # #     print("found")
-for i in db.selectAll("Booking"):
-    print(i.booking_id)
+for i in db.selectAll("Booking","booking_id = 1"):
+    print(i.trip.train.train_id)

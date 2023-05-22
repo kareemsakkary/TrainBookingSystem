@@ -51,7 +51,7 @@ class Train:
         self.capacity = row[1]
         self.status = row[2]
         self.no_of_cart = row[3]
-        self.manufacture = row[4]     
+        self.manufacture = row[4]
     def add(self) -> str:
         table= 'Train(capacity,status,no_of_carts,manufacturer)'
         values =f"VALUES({self.capacity},'{self.status}','{self.no_of_cart}','{self.manufacture}');"
@@ -68,7 +68,7 @@ class Train:
     def key(self) ->str:
         return f'train_id = {self.train_id}'
 class Trip:
-    def __init__(self,row=[None,None,None,None,None,None,None]):
+    def __init__(self,row=[None,None,None,None,None,None,None,None]):
         self.table = "Trip"
         self.trip_id = row[0]
         self.train_id= row[1]
@@ -77,6 +77,7 @@ class Trip:
         self.end_date = row[4]
         self.departure_station = row[5]
         self.arrival_station = row[6]
+        self.available_seat = row[7]     
         self.seats=[]
         self.ETA = None
         self.train = None
