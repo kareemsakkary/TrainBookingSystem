@@ -90,7 +90,7 @@ class Trip:
             seat.trip_id = self.trip_id
             seat.status = "available"
             self.seats.append(seat)
-        def update(self) -> str:
+    def update(self) -> str:
         st = f"""
         train_id = '{self.train.train_id}',
         price = '{self.price}',
