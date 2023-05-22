@@ -152,7 +152,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>270</y>
+      <y>300</y>
       <width>41</width>
       <height>21</height>
      </rect>
@@ -161,7 +161,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>fromtoicon-1.png</pixmap>
+     <pixmap>../img/fromtoicon-1.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -285,6 +285,29 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="calendarPopup">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="error">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>600</y>
+      <width>571</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Sitka Heading Semibold&quot;;
+color:rgb(180, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
