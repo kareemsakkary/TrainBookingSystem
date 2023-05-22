@@ -42,7 +42,7 @@ class database:
                     UPDATE TOP({data.no_of_seats}) Seat SET status = 'booked' WHERE trip_id = {data.trip.trip_id} AND status = 'available';
                 """
                 cursor.execute(sql)
-                data.trip = self.selectAll("Trip",f"trip_id = {data.trip.trip_id}")
+                data.trip = self.selectAll("Trip",f"trip_id = '{data.trip.trip_id}'")
 
     def getLastRecord(self,table_name,column):
         cursor = self.connection.cursor()
@@ -62,7 +62,7 @@ class database:
         row = cursor.fetchall()[0]
         if(table_name == "Trip"):
             trip = models.Trip(row)
-            trip.train= self.selectAll("Train",f"train_id = {row[1]};")[0]
+            trip.train= self.selectAll("Train",f"train_id = '{row[1]}'")[0]
         return trip
 
     def deleteRecord(self,tableName,where):
@@ -92,8 +92,8 @@ class database:
                 li.append(models.Train(row))
             elif(tablename=="Trip"):
                 trip = models.Trip(row)
-                trip.train = self.selectAll("Train",f"train_id = {row[1]};")[0]
-                trip.seats = self.selectAll("Seat",f"trip_id = {row[0]};")
+                trip.train = self.selectAll("Train",f"train_id = '{row[1]}'")[0]
+                trip.seats = self.selectAll("Seat",f"trip_id = '{row[0]}'")
                 trip.ETA = trip.end_date-trip.start_date
                 li.append(trip)
             elif(tablename=="Seat"):
@@ -113,5 +113,4 @@ class database:
         sql = f"""
             UPDATE {data.table} SET {data.update()};
         """
-        print(sql)
         cursor.execute(sql)

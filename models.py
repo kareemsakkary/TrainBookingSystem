@@ -91,13 +91,13 @@ class Trip:
             self.seats.append(seat)
     def update(self) -> str:
         st = f"""
-        train_id = {self.train.train_id},
-        price = {self.price},
-        start_date = {self.start_date},
-        end_date = {self.end_date},
-        departure_station =' {self.departure_station}',
+        train_id = '{self.train.train_id}',
+        price = '{self.price}',
+        start_date = '{self.start_date}',
+        end_date = '{self.end_date}',
+        departure_station = '{self.departure_station}',
         arrival_station = '{self.arrival_station}'
-         where trip_id = {self.trip_id}
+         where trip_id = '{self.trip_id}'
         """
         return st
     def setDates(self,start , end):

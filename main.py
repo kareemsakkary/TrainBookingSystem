@@ -10,5 +10,6 @@ db = databaseSQL.database()
 # booking.trip = trip
 # booking.set_seats_num(1)
 # db.addRecord(booking)
+# db.deleteRecord("Trip","trip_id = 3")
 for i in db.selectAll("Trip"):
-    print(i.departure_station)
+    print(i.departure_station,i.trip_id)
