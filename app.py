@@ -518,18 +518,15 @@ class UpdateTripScreen(QDialog):
         self.inputEndDate.setMinimumDateTime(QDateTime(current_date))
 
     def updatetripfunction(self):
-        price = float(self.inputPrice.text())
+        price = self.inputPrice.text()
         departure = self.inputDepartureStation.text()
         arrival = self.inputArrivalStation.text()
         trainID = self.inputTrainID.text()
-        startdate = self.inputStartDate.dateTime().toPyDateTime()
-        enddate = self.inputEndDate.dateTime().toPyDateTime()
-        train = db.selectAll("Train" , f"train_id = '{trainID}'")[0]
-
-        if  len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0 or len(str(price)) == 0:
-            self.error.setText("Cannot update without the required fields!")
-        # check train id exist
-        elif train is None:
+        startdate = self.inputStartDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
+        enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
+        if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
+            self.error.setText("Cannot add without the required fields!")
+        elif not db.count("Train", f"train_id ='{trainID}'") == 1:
             self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
             self.error.setText("Start date must be before end date!")
@@ -537,7 +534,7 @@ class UpdateTripScreen(QDialog):
             selectedTrip.price = price
             selectedTrip.departure_station = departure
             selectedTrip.arrival_station = arrival
-            selectedTrip.train = train
+            selectedTrip.train = db.selectAll("Train", f"train_id = '{int(trainID)}'")[0]
             selectedTrip.start_date = startdate
             selectedTrip.end_date = enddate
             db.update(selectedTrip)
