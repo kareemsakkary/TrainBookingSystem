@@ -460,8 +460,7 @@ class AddTripScreen(QDialog):
         enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
         if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
             self.error.setText("Cannot add without the required fields!")
-
-        elif db.selectAll("Train" , f"train_id = '{int(trainID)}'")[0] is None:
+        elif not db.count("Train", f"train_id ='{trainID}'") == 1:
             self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
             self.error.setText("Start date must be before end date!")
@@ -485,8 +484,10 @@ class UpdateTripScreen(QDialog):
         loadUi("ui/UpdateTrip.ui", self)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.updateTripButton.clicked.connect(self.updatetripfunction)
-        self.inputStartDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
-        self.inputEndDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
+        startDate = datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S')
+        endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M:%S')
+        self.inputStartDate.setMinimumDateTime(startDate)
+        self.inputEndDate.setMinimumDateTime(endDate)
         self.loadTripInfo()
         intValidator = QtGui.QIntValidator()
         floatValidator = QtGui.QDoubleValidator()
@@ -518,33 +519,27 @@ class UpdateTripScreen(QDialog):
         self.inputEndDate.setDateTime(endDate)
 
     def updatetripfunction(self):
-        price = float(self.inputPrice.text())
+        price = self.inputPrice.text()
         departure = self.inputDepartureStation.text()
         arrival = self.inputArrivalStation.text()
         trainID = self.inputTrainID.text()
-        startdate = self.inputStartDate.dateTime().toPyDateTime()
-        enddate = self.inputEndDate.dateTime().toPyDateTime()
-        train = db.selectAll("Train" , f"train_id = '{trainID}'")[0]
-
-        if  len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0 or len(str(price)) == 0:
-            self.error.setText("Cannot update without the required fields!")
-        # check train id exist
-        elif train is None:
-            self.error.setText("Train ID doesn't exist!")
+        startdate = self.inputStartDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
+        enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
+        if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
+            self.error.setText("Cannot add without the required fields!")
         elif startdate >= enddate:
             self.error.setText("Start date must be before end date!")
         else:
             selectedTrip.price = price
             selectedTrip.departure_station = departure
             selectedTrip.arrival_station = arrival
-            selectedTrip.train = train
+            selectedTrip.train = db.selectAll("Train", f"train_id = '{int(trainID)}'")[0]
             selectedTrip.start_date = startdate
             selectedTrip.end_date = enddate
             db.update(selectedTrip)
             self.showMessageBox()
             self.returnPrevScreen()
             widget.removeWidget(widget.currentWidget())
-
 
 
 class ShowAllTrips(QDialog):
@@ -588,9 +583,10 @@ class ShowAllTrips(QDialog):
         widget.removeWidget(self)
 
     def loadTrips(self):
-        self.tableWidget.setRowCount(db.count("Trip"))
+        current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.tableWidget.setRowCount(db.count("Trip",f"start_date >= '{current_datetime}'"))
         tableRow = 0
-        for row in db.selectAll("Trip"):
+        for row in db.selectAll("Trip", f"start_date >= '{current_datetime}'"):
             self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.trip_id)))
             self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.departure_station))
             self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.arrival_station))
