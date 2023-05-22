@@ -25,6 +25,9 @@ class database:
                     INSERT INTO Seat(seat_id,trip_id,status) VALUES         
                     """
                     i=0
+            if(i > 0):
+                cursor.execute(sql)
+
             
         else:
             cursor = self.connection.cursor()
