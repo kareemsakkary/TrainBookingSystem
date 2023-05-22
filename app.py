@@ -484,8 +484,6 @@ class UpdateTripScreen(QDialog):
         loadUi("ui/UpdateTrip.ui", self)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.updateTripButton.clicked.connect(self.updatetripfunction)
-        self.inputStartDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
-        self.inputEndDate.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
         self.loadTripInfo()
         intValidator = QtGui.QIntValidator()
         floatValidator = QtGui.QDoubleValidator()
@@ -515,6 +513,9 @@ class UpdateTripScreen(QDialog):
         endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M:%S')
         self.inputStartDate.setDateTime(startDate)
         self.inputEndDate.setDateTime(endDate)
+        current_date = datetime.now()
+        self.inputStartDate.setMinimumDateTime(QDateTime(current_date))
+        self.inputEndDate.setMinimumDateTime(QDateTime(current_date))
 
     def updatetripfunction(self):
         price = float(self.inputPrice.text())
@@ -587,9 +588,10 @@ class ShowAllTrips(QDialog):
         widget.removeWidget(self)
 
     def loadTrips(self):
-        self.tableWidget.setRowCount(db.count("Trip"))
+        current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.tableWidget.setRowCount(db.count("Trip",f"start_date >= '{current_datetime}'"))
         tableRow = 0
-        for row in db.selectAll("Trip"):
+        for row in db.selectAll("Trip", f"start_date >= '{current_datetime}'"):
             self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.trip_id)))
             self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.departure_station))
             self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.arrival_station))
