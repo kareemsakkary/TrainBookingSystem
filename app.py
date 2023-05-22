@@ -445,27 +445,20 @@ class AddTripScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
     def addtripfunction(self):
-        price = self.inputPrice.text()
+        price = float(self.inputPrice.text())
         departure = self.inputDepartureStation.text()
         arrival = self.inputArrivalStation.text()
         trainID = self.inputTrainID.text()
         startdate = self.inputStartDate.dateTime().toPyDateTime()
         enddate = self.inputEndDate.dateTime().toPyDateTime()
         train = db.selectAll("Train" , f"train_id = '{trainID}'")[0]
-
-        if len(price) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
-            self.error.setText("")
-            self.errorMsg.setText("")
-            self.errorMsg.setText("Cannot add without the required fields!")
+        if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
+            self.error.setText("Cannot add without the required fields!")
         #check train id exist
         elif train is None:
-            self.error.setText("")
-            self.errorMsg.setText("")
-            self.errorMsg.setText("Train ID doesn't exist!")
+            self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
-            self.error.setText("")
-            self.errorMsg.setText("")
-            self.errorMsg.setText("Start date must be before end date!")
+            self.error.setText("Start date must be before end date!")
         else:
             trip = models.Trip()
             trip.train = train
@@ -511,7 +504,7 @@ class UpdateTripScreen(QDialog):
         self.inputStartDate.setDateTime(QDateTime.fromString(selectedTrip.start_date))
         self.inputEndDate.setDateTime(QDateTime.fromString(selectedTrip.end_date))
     def updatetripfunction(self):
-        price = self.inputPrice.text()
+        price = float(self.inputPrice.text())
         departure = self.inputDepartureStation.text()
         arrival = self.inputArrivalStation.text()
         trainID = self.inputTrainID.text()
@@ -519,19 +512,15 @@ class UpdateTripScreen(QDialog):
         enddate = self.inputEndDate.dateTime().toPyDateTime()
         train = db.selectAll("Train" , f"train_id = '{trainID}'")[0]
 
-        if len(price) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
-            self.error.setText("")
-            self.errorMsg.setText("")
-            self.errorMsg.setText("Cannot update without the required fields!")
+        if  len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0 or len(str(price)) == 0:
+            self.error.setText("Cannot update without the required fields!")
         #check train id exist
         elif train is None:
-            self.error.setText("")
-            self.errorMsg.setText("")
-            self.errorMsg.setText("Train ID doesn't exist!")
+            self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
             self.error.setText("Start date must be before end date!")
         else:
-            selectedTrip.price = float(price)
+            selectedTrip.price = price
             selectedTrip.departure_station = departure
             selectedTrip.arrival_station = arrival
             selectedTrip.train = train
