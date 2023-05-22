@@ -503,23 +503,19 @@ class UpdateTripScreen(QDialog):
         msg.setText("Trip updated successfully!")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
+
     def returnPrevScreen(self):
         widget.removeWidget(self)
+
     def loadTripInfo(self):
         self.inputPrice.setText(str(selectedTrip.price))
         self.inputDepartureStation.setText(selectedTrip.departure_station)
         self.inputArrivalStation.setText(selectedTrip.arrival_station)
         self.inputTrainID.setText(str(selectedTrip.train.train_id))
-
-        def loadTripInfo(self):
-            self.inputPrice.setText(str(selectedTrip.price))
-            self.inputDepartureStation.setText(selectedTrip.departure_station)
-            self.inputArrivalStation.setText(selectedTrip.arrival_station)
-            self.inputTrainID.setText(str(selectedTrip.train.train_id))
-            startDate = QtCore.QDateTime.fromString(selectedTrip.start_date, "yyyy-MM-dd HH:mm:ss")
-            endDate = QtCore.QDateTime.fromString(selectedTrip.end_date, "yyyy-MM-dd HH:mm:ss")
-            self.inputStartDate.setDateTime(startDate)
-            self.inputEndDate.setDateTime(endDate)
+        startDate = datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S')
+        endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M:%S')
+        self.inputStartDate.setDateTime(startDate)
+        self.inputEndDate.setDateTime(endDate)
 
     def updatetripfunction(self):
         price = float(self.inputPrice.text())
@@ -532,7 +528,7 @@ class UpdateTripScreen(QDialog):
 
         if  len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0 or len(str(price)) == 0:
             self.error.setText("Cannot update without the required fields!")
-        #check train id exist
+        # check train id exist
         elif train is None:
             self.error.setText("Train ID doesn't exist!")
         elif startdate >= enddate:
@@ -546,6 +542,7 @@ class UpdateTripScreen(QDialog):
             selectedTrip.end_date = enddate
             db.update(selectedTrip)
             self.showMessageBox()
+            self.returnPrevScreen()
             widget.removeWidget(widget.currentWidget())
 
 
@@ -611,6 +608,7 @@ class ShowAllTrips(QDialog):
             widget.addWidget(BookTripScreen())
             widget.setCurrentIndex(widget.currentIndex() + 1)
 
+
 class BookTripScreen(QDialog):
     def __init__(self):
         super(BookTripScreen, self).__init__()
@@ -634,6 +632,12 @@ class BookTripScreen(QDialog):
     def returnPrevScreen(self):
         self.clearSelected()
         widget.removeWidget(self)
+
+    def gotoallbookings(self):
+        allBooking = ShowBookings()
+        widget.addWidget(allBooking)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
     def loadTripInfo(self):
         self.departureStationLabel.setText(selectedTrip.departure_station)
         self.arrivalStationLabel.setText(selectedTrip.arrival_station)
@@ -666,6 +670,8 @@ class BookTripScreen(QDialog):
             self.clearSelected()
             self.returnPrevScreen()
             self.clearSelected()
+            widget.removeWidget(widget.currentWidget())
+            self.gotoallbookings()
         else:
             book = models.Booking()
             book.trip = selectedTrip
@@ -675,6 +681,10 @@ class BookTripScreen(QDialog):
             self.showMessageBox()
             self.clearSelected()
             self.returnPrevScreen()
+            widget.removeWidget(widget.currentWidget())
+            self.gotoallbookings()
+
+
 class ShowBookings(QDialog):
     def __init__(self):
         super(ShowBookings, self).__init__()
@@ -891,7 +901,7 @@ class UserOptionsScreen(QDialog):
         loadUi("ui/userOptions.ui", self)
         self.updateInfoButton.clicked.connect(self.gotoupdateInfo)
         self.bookButton.clicked.connect(self.gotobooktrip)
-        self.cancelButton.clicked.connect(self.gotocanceltrip)
+        # self.cancelButton.clicked.connect(self.gotocanceltrip)
         self.findTripButton.clicked.connect(self.gotofindtrip)
         self.returnButton.clicked.connect(self.returnPrevScreen)
 
