@@ -32,8 +32,8 @@
    <widget class="QLabel" name="title">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
+      <x>50</x>
+      <y>80</y>
       <width>721</width>
       <height>61</height>
      </rect>
@@ -49,7 +49,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="optionmsg">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>90</x>
       <y>190</y>
       <width>561</width>
       <height>41</height>
@@ -67,7 +67,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>320</y>
+      <y>290</y>
       <width>361</width>
       <height>61</height>
      </rect>
@@ -93,7 +93,7 @@ QPushButton:hover{
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>470</y>
+      <y>410</y>
       <width>361</width>
       <height>61</height>
      </rect>
@@ -115,47 +115,11 @@ QPushButton:hover{
      <string>Update your profile info</string>
     </property>
    </widget>
-   <widget class="QCommandLinkButton" name="tripsButton">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>120</y>
-      <width>141</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
-border-radius: 20px;
-background-color:qlineargradient(spread:pad, x1:0.467, y1:0.37, x2:1, y2:1, stop:0 rgba(0, 80, 138, 255), stop:1 rgba(255, 255, 255, 255));
-font: 63 12pt &quot;Sitka Small Semibold&quot;;
-color:white;
-}
-
-QPushButton:hover{
-	background-color: white;
-	color: #00508a;
-}</string>
-    </property>
-    <property name="text">
-     <string>Your Trips</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../img/suitcase.png</normaloff>../img/suitcase.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
    <widget class="QPushButton" name="findTripButton">
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>620</y>
+      <y>530</y>
       <width>361</width>
       <height>61</height>
      </rect>
@@ -201,6 +165,32 @@ QPushButton:hover{
     </property>
     <property name="text">
      <string>Return</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tripsButton">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>650</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-radius: 20px;
+background-color: rgb(255, 255, 255);
+font: 63 12pt &quot;Sitka Small Semibold&quot;;
+color:rgb(0, 86, 148);
+}
+
+QPushButton:hover{
+	background-color: #00508a;
+	color:white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Your Trips</string>
     </property>
    </widget>
   </widget>

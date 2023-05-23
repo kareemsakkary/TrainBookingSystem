@@ -32,10 +32,10 @@
    <widget class="QPushButton" name="cancelButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>730</y>
-      <width>351</width>
-      <height>51</height>
+      <x>220</x>
+      <y>650</y>
+      <width>361</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -61,8 +61,8 @@ QPushButton:hover{
    <widget class="QLabel" name="label1">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>180</y>
+      <x>20</x>
+      <y>170</y>
       <width>221</width>
       <height>31</height>
      </rect>
@@ -78,8 +78,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label2">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>180</y>
+      <x>430</x>
+      <y>170</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -95,8 +95,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label3">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>320</y>
+      <x>20</x>
+      <y>300</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -112,7 +112,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="returnButton">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>650</x>
       <y>780</y>
       <width>141</width>
       <height>41</height>
@@ -138,8 +138,8 @@ QPushButton:hover{
    <widget class="QLabel" name="label4">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>320</y>
+      <x>420</x>
+      <y>300</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -155,9 +155,9 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="departureStationLabel">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>240</y>
-      <width>221</width>
+      <x>20</x>
+      <y>230</y>
+      <width>361</width>
       <height>51</height>
      </rect>
     </property>
@@ -169,7 +169,7 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white;
-border-radius: 20px;
+border-radius: 10px;
 font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="text">
@@ -182,15 +182,15 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
    <widget class="QLabel" name="arrivalStationLabel">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>240</y>
-      <width>221</width>
+      <x>420</x>
+      <y>230</y>
+      <width>361</width>
       <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white;
-border-radius: 20px;
+border-radius: 10px;
 font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="text">
@@ -203,9 +203,9 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
    <widget class="QLabel" name="startDateLabel">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>370</y>
-      <width>221</width>
+      <x>20</x>
+      <y>360</y>
+      <width>361</width>
       <height>51</height>
      </rect>
     </property>
@@ -217,7 +217,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white;
-border-radius: 20px;
+border-radius: 10px;
 font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="text">
@@ -230,9 +230,9 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
    <widget class="QLabel" name="endDateLabel">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>370</y>
-      <width>221</width>
+      <x>420</x>
+      <y>360</y>
+      <width>361</width>
       <height>51</height>
      </rect>
     </property>
@@ -244,7 +244,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white;
-border-radius: 20px;
+border-radius: 10px;
 font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="text">
@@ -257,8 +257,8 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
    <widget class="QLabel" name="labelSeats">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>450</y>
+      <x>420</x>
+      <y>430</y>
       <width>201</width>
       <height>41</height>
      </rect>
@@ -274,9 +274,9 @@ color: rgb(255, 255, 255);</string>
    <widget class="QSpinBox" name="inputSeatsCount">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>620</y>
-      <width>91</width>
+      <x>600</x>
+      <y>560</y>
+      <width>100</width>
       <height>51</height>
      </rect>
     </property>
@@ -292,7 +292,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 15px;</string>
+     <string notr="true">border-radius: 10px;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -319,8 +319,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="title">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>50</y>
+      <x>40</x>
+      <y>80</y>
       <width>721</width>
       <height>61</height>
      </rect>
@@ -351,8 +351,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label4_2">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>450</y>
+      <x>20</x>
+      <y>430</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -368,9 +368,9 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="totalPriceLabel">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>510</y>
-      <width>221</width>
+      <x>20</x>
+      <y>480</y>
+      <width>361</width>
       <height>51</height>
      </rect>
     </property>
@@ -382,7 +382,7 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white;
-border-radius: 20px;
+border-radius: 10px;
 font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="text">
@@ -395,9 +395,9 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
    <widget class="QLabel" name="seatsCountLabel">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>510</y>
-      <width>221</width>
+      <x>420</x>
+      <y>480</y>
+      <width>361</width>
       <height>51</height>
      </rect>
     </property>
@@ -409,7 +409,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white;
-border-radius: 20px;
+border-radius: 10px;
 font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     </property>
     <property name="text">
@@ -422,9 +422,9 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
    <widget class="QLabel" name="instructionLabel">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>630</y>
-      <width>471</width>
+      <x>20</x>
+      <y>560</y>
+      <width>501</width>
       <height>41</height>
      </rect>
     </property>
@@ -433,14 +433,14 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Enter number of seats you want to cancel</string>
+     <string>Enter the number of seats you want to cancel:</string>
     </property>
    </widget>
    <widget class="QLabel" name="error">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>690</y>
+      <x>180</x>
+      <y>730</y>
       <width>441</width>
       <height>20</height>
      </rect>

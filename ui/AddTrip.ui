@@ -29,30 +29,13 @@
 
 }</string>
    </property>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>60</y>
-      <width>161</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 20 20pt &quot;Sitka Heading Semibold&quot;;
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Add Trip</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="inputPrice">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>570</y>
-      <width>311</width>
-      <height>41</height>
+      <x>420</x>
+      <y>540</y>
+      <width>361</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -62,8 +45,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="priceLabel">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>510</y>
+      <x>430</x>
+      <y>490</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -80,9 +63,9 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>670</y>
-      <width>351</width>
-      <height>51</height>
+      <y>660</y>
+      <width>361</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -110,8 +93,8 @@ QPushButton:hover{
      <rect>
       <x>20</x>
       <y>250</y>
-      <width>311</width>
-      <height>41</height>
+      <width>361</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -121,8 +104,8 @@ QPushButton:hover{
    <widget class="QLabel" name="departureStationLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>190</y>
+      <x>30</x>
+      <y>200</y>
       <width>221</width>
       <height>31</height>
      </rect>
@@ -138,8 +121,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="arrivalStationLabel">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>190</y>
+      <x>420</x>
+      <y>200</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -155,8 +138,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="startDateLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>340</y>
+      <x>20</x>
+      <y>350</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -172,10 +155,10 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLineEdit" name="inputArrivalStation">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>420</x>
       <y>250</y>
-      <width>311</width>
-      <height>41</height>
+      <width>361</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -185,8 +168,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="returnButton">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>760</y>
+      <x>650</x>
+      <y>780</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -211,8 +194,8 @@ QPushButton:hover{
    <widget class="QLabel" name="endDateLabel">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>340</y>
+      <x>420</x>
+      <y>350</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -228,8 +211,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="trainIDLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>510</y>
+      <x>20</x>
+      <y>490</y>
       <width>191</width>
       <height>31</height>
      </rect>
@@ -246,9 +229,9 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>570</y>
-      <width>311</width>
-      <height>41</height>
+      <y>540</y>
+      <width>361</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -260,8 +243,8 @@ color: rgb(255, 255, 255);</string>
      <rect>
       <x>20</x>
       <y>400</y>
-      <width>311</width>
-      <height>41</height>
+      <width>361</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -304,10 +287,10 @@ color: rgb(255, 255, 255);</string>
    <widget class="QDateTimeEdit" name="inputEndDate">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>420</x>
       <y>400</y>
-      <width>311</width>
-      <height>41</height>
+      <width>361</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -351,7 +334,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>740</y>
+      <y>730</y>
       <width>441</width>
       <height>20</height>
      </rect>
@@ -365,6 +348,23 @@ color:rgb(180, 0, 0)</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="title">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>80</y>
+      <width>721</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20 20pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Make your unforgettable train experience with us!</string>
     </property>
    </widget>
   </widget>

@@ -29,28 +29,11 @@
 
 }</string>
    </property>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>90</y>
-      <width>291</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 20 20pt &quot;Sitka Heading Semibold&quot;;
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Select a trip to book</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="returnButton">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>760</y>
+      <x>650</x>
+      <y>790</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -75,9 +58,9 @@ QPushButton:hover{
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>190</y>
-      <width>600</width>
+      <x>70</x>
+      <y>170</y>
+      <width>651</width>
       <height>500</height>
      </rect>
     </property>
@@ -157,6 +140,40 @@ text-align: center;</string>
       <set>AlignCenter</set>
      </property>
     </column>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>80</y>
+      <width>721</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20 20pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Make your unforgettable train experience with us!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="instructionLabel">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>690</y>
+      <width>471</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20 15pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Please double click on the trip to book it :)</string>
+    </property>
    </widget>
   </widget>
  </widget>
