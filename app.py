@@ -882,7 +882,6 @@ class ShowReportScreen(QDialog):
         super(ShowReportScreen, self).__init__()
         loadUi("ui/Report.ui", self)
         self.loadInfo()
-        self.tableWidget.setTextAlignment(4)
         self.tableWidget.horizontalHeader().setFixedHeight(40)
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.returnButton.clicked.connect(self.returnPrevScreen)

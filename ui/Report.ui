@@ -102,14 +102,6 @@ text-align: center;</string>
     <attribute name="verticalHeaderDefaultSectionSize">
      <number>40</number>
     </attribute>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignCenter</set>
-     </property>
-    </row>
     <column>
      <property name="text">
       <string>Departure station</string>
