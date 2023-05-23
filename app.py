@@ -839,13 +839,12 @@ class ShowMatchingTripsScreen(QDialog):
         self.tableWidget.setRowCount(len(matchingTrips))
         tableRow = 0
         for row in matchingTrips:
-            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.trip_id)))
-            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.departure_station))
-            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.arrival_station))
-            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.price)))
-            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row.start_date)))
-            self.tableWidget.setItem(tableRow, 5, QtWidgets.QTableWidgetItem(str(row.end_date)))
-            self.tableWidget.setItem(tableRow, 6, QtWidgets.QTableWidgetItem(str(row.train.train_id)))
+            li = [str(row.trip_id),row.departure_station,row.arrival_station,str(row.price),
+                  str(row.start_date),str(row.end_date),str(row.train.train_id)]
+            for i in range(7):
+                item = QtWidgets.QTableWidgetItem(li[i])
+                item.setTextAlignment(4)
+                self.tableWidget.setItem(tableRow, i, item)
             tableRow += 1
 
     def action(self):
