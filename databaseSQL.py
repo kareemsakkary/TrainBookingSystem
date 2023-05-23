@@ -46,7 +46,7 @@ class database:
                     UPDATE TOP({data.no_of_seats}) Seat SET status = 'booked' WHERE trip_id = {data.trip.trip_id} AND status = 'available';
                 """
                 cursor.execute(sql)
-                data.trip = self.selectAll("Trip",f"trip_id = '{data.trip.trip_id}'")
+                data.trip = self.selectAll("Trip",f"Trip.trip_id = '{data.trip.trip_id}'")
 
     def getLastRecord(self,table_name,column):
         cursor = self.connection.cursor()
