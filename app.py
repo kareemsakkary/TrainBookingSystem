@@ -682,8 +682,8 @@ class BookTripScreen(QDialog):
 
         if int(numofseats) > db.count("Seat",f"status = 'available' and trip_id = '{selectedTrip.trip_id}';"):
             self.error.setText("Not enough seats!")
-        elif db.selectAll("Booking", f"account.account_id = '{loggedInUser.account_id}' and trip.trip_id = '{selectedTrip.trip_id}'"):
-            booking = db.selectAll("Booking", f"account.account_id = '{loggedInUser.account_id}' and trip.trip_id = '{selectedTrip.trip_id}'")[0]
+        elif db.selectAll("Booking", f"Account.account_id = '{loggedInUser.account_id}' and Trip.trip_id = '{selectedTrip.trip_id}'"):
+            booking = db.selectAll("Booking", f"Account.account_id = '{loggedInUser.account_id}' and Trip.trip_id = '{selectedTrip.trip_id}'")[0]
             booking.set_seats_num(booking.no_of_seats + int(numofseats))
             db.update(booking)
             self.showMessageBox()
@@ -724,9 +724,9 @@ class ShowBookings(QDialog):
         widget.removeWidget(self)
 
     def loadBookings(self):
-        self.tableWidget.setRowCount(db.count("Booking",f"account.account_id = '{loggedInUser.account_id}'"))
+        self.tableWidget.setRowCount(db.count("Booking",f"Account.account_id = '{loggedInUser.account_id}'"))
         tableRow = 0
-        for row in db.selectAll("Booking",f"account.account_id = '{loggedInUser.account_id}'"):
+        for row in db.selectAll("Booking",f"Account.account_id = '{loggedInUser.account_id}'"):
             li = [str(row.booking_id),row.trip.departure_station,row.trip.arrival_station,str(row.trip.start_date),
                   str(row.trip.end_date),str(row.no_of_seats),str(row.price),str(row.trip.train.train_id),
                   str(row.trip.trip_id)]
