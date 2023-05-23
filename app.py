@@ -366,7 +366,6 @@ class UpdateTrainScreen(QDialog):
         self.inputCapacity.setValidator(intValidator)
         self.inputNumofcart.setValidator(intValidator)
         self.inputManufacturer.setValidator(stringValidator)
-        self.inputCapacity.setReadOnly(True)
 
     def showMessageBox(self):
         msg = QMessageBox()
@@ -454,8 +453,8 @@ class AddTripScreen(QDialog):
         departure = self.inputDepartureStation.text()
         arrival = self.inputArrivalStation.text()
         trainID =self.inputTrainID.text()
-        startdate = self.inputStartDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M")
-        enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M")
+        startdate = self.inputStartDate.dateTime().toPyDateTime().replace(second=0, microsecond=0).strftime('%Y-%m-%d %H:%M:%S')
+        enddate = self.inputEndDate.dateTime().toPyDateTime().replace(second=0, microsecond=0).strftime('%Y-%m-%d %H:%M:%S')
         if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
             self.error.setText("Cannot add without the required fields!")
         elif not db.count("Train", f"train_id ='{trainID}'") == 1:
@@ -509,8 +508,8 @@ class UpdateTripScreen(QDialog):
         self.inputDepartureStation.setText(selectedTrip.departure_station)
         self.inputArrivalStation.setText(selectedTrip.arrival_station)
         self.inputTrainID.setText(str(selectedTrip.train.train_id))
-        startDate = datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M')
-        endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M')
+        startDate = datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S').replace(second=0, microsecond=0)
+        endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M:%S').replace(second=0, microsecond=0)
         self.inputStartDate.setDateTime(startDate)
         self.inputEndDate.setDateTime(endDate)
 
@@ -519,8 +518,8 @@ class UpdateTripScreen(QDialog):
         departure = self.inputDepartureStation.text()
         arrival = self.inputArrivalStation.text()
         trainID = self.inputTrainID.text()
-        startdate = self.inputStartDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M")
-        enddate = self.inputEndDate.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M")
+        startdate = self.inputStartDate.dateTime().toPyDateTime().replace(second=0, microsecond=0).strftime('%Y-%m-%d %H:%M:%S')
+        enddate = self.inputEndDate.dateTime().toPyDateTime().replace(second=0, microsecond=0).strftime('%Y-%m-%d %H:%M:%S')
         if len(str(price)) == 0 or len(departure) == 0 or len(arrival) == 0 or len(trainID) == 0:
             self.error.setText("Cannot add without the required fields!")
         elif startdate >= enddate:
@@ -550,7 +549,10 @@ class ShowAllTrips(QDialog):
         self.loadTrips()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
-        self.instructionLabel.setText("Please double click on the trip to update it :)")
+        if loggedInUser.role == "admin":
+            self.instructionLabel.setText("Please double click on the trip to update it :)")
+        elif loggedInUser.role == "customer":
+            self.instructionLabel.setText("Please double click on the trip to book it :)")
 
     def getClickedCell(self, index):
         row = index.row()
@@ -619,6 +621,7 @@ class BookTripScreen(QDialog):
         selectedTrip.price = ""
         selectedTrip.start_date = ""
         selectedTrip.end_date = ""
+        matchingTrips.clear()
     def returnPrevScreen(self):
         self.clearSelected()
         widget.removeWidget(self)
@@ -720,7 +723,7 @@ class ShowBookings(QDialog):
         selectedTrip.price = db.selectAll("Trip",f"Trip.trip_id = '{selectedTrip.trip_id}'")[0].price
         self.gotocanceltrip()
     def gotocanceltrip(self):
-        if datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M') < datetime.now():
+        if datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S').replace(second=0, microsecond=0) < datetime.now().replace(second=0, microsecond=0):
             self.error.setText("You can't cancel a trip that already started!")
         else:
             widget.removeWidget(self)
@@ -860,7 +863,7 @@ class FindTripScreen(QDialog):
     def findTrip(self):
         departure_station = self.inputDepartureStation.text()
         arrival_station = self.inputArrivalStation.text()
-        start_date = self.inputStartDate.dateTime().toPyDateTime().strftime('%Y-%m-%d %H:%M')
+        start_date = self.inputStartDate.dateTime().toPyDateTime().replace(second=0, microsecond=0).strftime('%Y-%m-%d %H:%M:%S')
         no_of_seats = int(self.inputSeatsCount.text())
         if len(str(no_of_seats)) == 0 or len(departure_station) == 0 or len(arrival_station) == 0:
             self.error.setText("Cannot search without the required fields!")
