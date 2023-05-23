@@ -345,11 +345,11 @@ class ShowAllTrains(QDialog):
         self.tableWidget.setRowCount(db.count("Train"))
         tableRow = 0
         for row in db.selectAll("Train"):
-            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.train_id)))
-            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(str(row.capacity)))
-            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.status))
-            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.no_of_cart)))
-            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(row.manufacture))
+            li = [str(row.train_id) , str(row.capacity),row.status,str(row.no_of_cart),row.manufacture ]
+            for i in range(5):
+                item = QtWidgets.QTableWidgetItem(li[i])
+                item.setTextAlignment(4)
+                self.tableWidget.setItem(tableRow, i, item)
             tableRow += 1
 
     def gotodeletetrain(self):
@@ -605,13 +605,12 @@ class ShowAllTrips(QDialog):
         self.tableWidget.setRowCount(db.count("Trip",f"start_date >= '{current_datetime}'"))
         tableRow = 0
         for row in db.selectAll("Trip", f"start_date >= '{current_datetime}'"):
-            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.trip_id)))
-            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.departure_station))
-            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.arrival_station))
-            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.price)))
-            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row.start_date)))
-            self.tableWidget.setItem(tableRow, 5, QtWidgets.QTableWidgetItem(str(row.end_date)))
-            self.tableWidget.setItem(tableRow, 6, QtWidgets.QTableWidgetItem(str(row.train.train_id)))
+            li = [str(row.trip_id),row.departure_station,row.arrival_station,str(row.price),str(row.start_date),
+                  str(row.end_date),str(row.train.train_id)]
+            for i in range(7):
+                item = QtWidgets.QTableWidgetItem(li[i])
+                item.setTextAlignment(4)
+                self.tableWidget.setItem(tableRow, i, item)
             tableRow += 1
 
     def action(self):
@@ -718,15 +717,13 @@ class ShowBookings(QDialog):
         self.tableWidget.setRowCount(db.count("Booking",f"account.account_id = '{loggedInUser.account_id}'"))
         tableRow = 0
         for row in db.selectAll("Booking",f"account.account_id = '{loggedInUser.account_id}'"):
-            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.booking_id)))
-            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.trip.departure_station))
-            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.trip.arrival_station))
-            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.trip.start_date)))
-            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row.trip.end_date)))
-            self.tableWidget.setItem(tableRow, 5, QtWidgets.QTableWidgetItem(str(row.no_of_seats)))
-            self.tableWidget.setItem(tableRow, 6, QtWidgets.QTableWidgetItem(str(row.price)))
-            self.tableWidget.setItem(tableRow, 7, QtWidgets.QTableWidgetItem(str(row.trip.train.train_id)))
-            self.tableWidget.setItem(tableRow, 8, QtWidgets.QTableWidgetItem(str(row.trip.trip_id)))
+            li = [str(row.booking_id),row.trip.departure_station,row.trip.arrival_station,str(row.trip.start_date),
+                  str(row.trip.end_date),str(row.no_of_seats),str(row.price),str(row.trip.train.train_id),
+                  str(row.trip.trip_id)]
+            for i in range(9):
+                item = QtWidgets.QTableWidgetItem(str(li[i]))
+                item.setTextAlignment(4)
+                self.tableWidget.setItem(tableRow, i, item)
             tableRow += 1
 
     def getClickedCell(self):
