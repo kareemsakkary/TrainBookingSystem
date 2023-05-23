@@ -163,9 +163,9 @@ text-align: center;</string>
    <widget class="QLabel" name="instructionLabel">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>150</x>
       <y>690</y>
-      <width>471</width>
+      <width>531</width>
       <height>31</height>
      </rect>
     </property>
@@ -175,6 +175,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">

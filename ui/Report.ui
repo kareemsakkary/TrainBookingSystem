@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>790</y>
+      <y>780</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -74,9 +74,6 @@ text-align: center;</string>
     </property>
     <property name="sizeAdjustPolicy">
      <enum>QAbstractScrollArea::AdjustToContents</enum>
-    </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::NoEditTriggers</set>
     </property>
     <property name="showGrid">
      <bool>true</bool>
@@ -183,8 +180,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="accountsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
@@ -228,8 +225,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="tripsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
@@ -273,8 +270,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="trainsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
@@ -318,8 +315,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="bookingsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
