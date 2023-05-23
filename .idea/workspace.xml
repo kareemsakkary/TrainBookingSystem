@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f928daff-1589-44be-9094-a10f197f7454" name="Changes" comment="fix bugs">
+    <list default="true" id="f928daff-1589-44be-9094-a10f197f7454" name="Changes" comment="edit ui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/ShowTrains.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ShowTrains.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +209,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684838741166</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="delete train">
+      <created>1684847847467</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1684847847467</updated>
+    </task>
+    <task id="LOCAL-00020" summary="edit ui">
+      <created>1684847866849</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1684847866849</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,9 +243,10 @@
     <MESSAGE value="edit book train" />
     <MESSAGE value="edit book trip" />
     <MESSAGE value="fix bug" />
-    <MESSAGE value="edit ui" />
     <MESSAGE value="fix bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bugs" />
+    <MESSAGE value="delete train" />
+    <MESSAGE value="edit ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit ui" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

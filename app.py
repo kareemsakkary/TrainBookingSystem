@@ -802,6 +802,7 @@ class ShowMatchingTripsScreen(QDialog):
         self.tableWidget.setHorizontalHeaderLabels(
             ["Trip Id", "Departure Station", "Arrival Station", "Price", "Start Date", "End Date", "Train ID"])
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
+        self.tableWidget.horizontalHeader().setFixedHeight(40)
         self.loadTrips()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
