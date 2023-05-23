@@ -75,8 +75,9 @@ class database:
         DELETE FROM {data.table} WHERE {data.key()};
         """
         cursor.execute(sql)
-        if(data.table == 'booking'):
+        if(data.table == 'Booking'):
             cursor = self.connection.cursor()
+          
             sql = f"""
                 UPDATE TOP({data.no_of_seats}) Seat SET status = 'available' WHERE trip_id = {data.trip.trip_id} AND status = 'booked';
             """
