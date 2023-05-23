@@ -180,8 +180,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="accountsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
@@ -225,8 +225,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="tripsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
@@ -270,8 +270,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="trainsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
@@ -315,8 +315,8 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="bookingsNum">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>20</y>
+       <x>70</x>
+       <y>30</y>
        <width>41</width>
        <height>51</height>
       </rect>
