@@ -802,6 +802,7 @@ class ShowMatchingTripsScreen(QDialog):
         self.tableWidget.setHorizontalHeaderLabels(
             ["Trip Id", "Departure Station", "Arrival Station", "Price", "Start Date", "End Date", "Train ID"])
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
+        self.tableWidget.horizontalHeader().setFixedHeight(40)
         self.loadTrips()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
@@ -912,13 +913,14 @@ class ShowReportScreen(QDialog):
         tableRow = 0
         sizes = db.tableSizes()
         self.accountsNum.setText(str(sizes[0][0]))
-        self.tripsNum.setText(str(sizes[1][0]))
+        self.bookingsNum.setText(str(sizes[1][0]))
         self.trainsNum.setText(str(sizes[2][0]))
-        self.bookingsNum.setText(str(sizes[3][0]))
+        self.tripsNum.setText(str(sizes[3][0]))
         for row in db.reportTrips():
-            for i in range(4):
+            for i in range(5):
                 item =QtWidgets.QTableWidgetItem(str(row[i]))
                 item.setTextAlignment(4)
+
                 self.tableWidget.setItem(tableRow, i, item)
             tableRow += 1
 
