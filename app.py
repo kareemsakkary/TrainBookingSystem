@@ -1,5 +1,6 @@
+# Online server on somee.com
 # install Pyqt5 & Qt designer by "pip install pyqt5" , "pip install pyqt5-tools"
-
+# install pyodbc with "pip install pyodbc"
 import sys
 import time
 import databaseSQL
