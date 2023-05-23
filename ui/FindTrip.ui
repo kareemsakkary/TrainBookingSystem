@@ -151,17 +151,17 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="icon">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>330</y>
-      <width>31</width>
-      <height>21</height>
+      <x>378</x>
+      <y>315</y>
+      <width>55</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../img/fromtoicon-1.png</pixmap>
+     <pixmap>../img/route.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

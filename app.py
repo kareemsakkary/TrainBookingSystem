@@ -550,6 +550,7 @@ class ShowAllTrips(QDialog):
         self.loadTrips()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
+        self.instructionLabel.setText("Please double click on the trip to book it :)")
 
     def getClickedCell(self, index):
         row = index.row()
@@ -686,6 +687,7 @@ class ShowBookings(QDialog):
         self.loadBookings()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
+        self.instructionLabel.setText("Please double click on the trip to cancel it :(")
 
     def returnPrevScreen(self):
         widget.removeWidget(self)
@@ -762,7 +764,7 @@ class CancelTripScreen(QDialog):
             self.returnPrevScreen()
     def MsgBox(self):
         msg = QMessageBox()
-        msg.setWindowTitle("Success")
+        msg.setWindowTitle("Success cancellation!")
         msg.setText("Booking canceled successfully!")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
@@ -780,11 +782,11 @@ class ShowMatchingTripsScreen(QDialog):
         self.loadTrips()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
+        self.instructionLabel.setText("Please double click on the trip to book it :)")
 
     def getClickedCell(self, index):
         row = index.row()
         column = index.column()
-
         if column >= 0:
             selectedTrip.trip_id = self.tableWidget.item(row, 0).text()
             selectedTrip.departure_station = self.tableWidget.item(row, 1).text()
@@ -804,6 +806,7 @@ class ShowMatchingTripsScreen(QDialog):
         selectedTrip.start_date = ""
         selectedTrip.end_date = ""
         selectedTrip.train = None
+        matchingTrips.clear()
 
     def returnPrevScreen(self):
         self.clearSelected()
@@ -847,6 +850,13 @@ class FindTripScreen(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
 
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Not found!")
+        msg.setText("No available seats found that satisfy these criteria!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
     def findTrip(self):
         departure_station = self.inputDepartureStation.text()
         arrival_station = self.inputArrivalStation.text()
@@ -855,9 +865,12 @@ class FindTripScreen(QDialog):
         if len(str(no_of_seats)) == 0 or len(departure_station) == 0 or len(arrival_station) == 0:
             self.error.setText("Cannot search without the required fields!")
         else:
-            matchingTrips.extend(db.getTrips(no_of_seats, arrival_station,departure_station, start_date))
-            widget.addWidget(ShowMatchingTripsScreen())
-            widget.setCurrentIndex(widget.currentIndex() + 1)
+            matchingTrips.extend(db.getTrips(no_of_seats, arrival_station, departure_station, start_date))
+            if (len(matchingTrips)) == 0:
+                self.showMessageBox()
+            else:
+                widget.addWidget(ShowMatchingTripsScreen())
+                widget.setCurrentIndex(widget.currentIndex() + 1)
 
 class AdminOptionsScreen(QDialog):
     def __init__(self):
