@@ -877,6 +877,32 @@ class FindTripScreen(QDialog):
             else:
                 widget.addWidget(ShowMatchingTripsScreen())
                 widget.setCurrentIndex(widget.currentIndex() + 1)
+class ShowReportScreen(QDialog):
+    def __init__(self):
+        super(UserOptionsScreen, self).__init__()
+        loadUi("ui/Report.ui", self)
+        self.loadInfo()
+        self.tableWidget.horizontalHeader().setFixedHeight(20)
+        self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
+        self.returnButton.clicked.connect(self.returnPrevScreen)
+    def returnPrevScreen(self):
+        self.clearSelected()
+        widget.removeWidget(self)
+
+    def loadInfo(self):
+        self.tableWidget.setRowCount(len(db.reportTrips()))
+        tableRow = 0
+        self.accountsNum.setText(str(db.count("Account")))
+        self.tripsNum.setText(str(db.count("Trip")))
+        self.trainsNum.setText(str(db.count("Train")))
+        self.bookingsNum.setText(str(db.count("Booking")))
+        for row in db.reportTrips():
+            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row[4])))
+            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row[3])))
+            tableRow += 1
 
 class AdminOptionsScreen(QDialog):
     def __init__(self):
@@ -886,10 +912,15 @@ class AdminOptionsScreen(QDialog):
         self.updateTrainButton.clicked.connect(self.gotoshowtrains)
         self.addTripButton.clicked.connect(self.gotoaddtrip)
         self.updateTripButton.clicked.connect(self.gotoshowtrips)
+        self.showReportsButton.clicked.connect(self.gotoshowreport)
         self.returnButton.clicked.connect(self.returnPrevScreen)
 
     def returnPrevScreen(self):
         widget.removeWidget(self)
+    def gotoshowreport(self):
+        showReport = ShowReportScreen()
+        widget.addWidget(showReport)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def gotoaddtrain(self):
         addTrain = AddTrainScreen()
@@ -945,7 +976,6 @@ class UserOptionsScreen(QDialog):
         findTrip = FindTripScreen()
         widget.addWidget(findTrip)
         widget.setCurrentIndex(widget.currentIndex() + 1)
-
 
 # main
 if __name__ == "__main__":
