@@ -30,5 +30,5 @@ db = databaseSQL.database()
 #
 # # for i in db.getTrips(1,arrival_station="dahab",departure_station="cairo"):
 # #     print("found")
-for i in db.getTrips(5,):
-    print(i.train.train_id)
+for i in db.reportTrips():
+    print(i)

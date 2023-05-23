@@ -191,4 +191,11 @@ class database:
             li.append(trip)
         return li
 
-
+    def reportTrips(self):
+        cursor = self.connection.cursor()
+        sql = """SELECT departure_station , arrival_station , COUNT(Trip.trip_id) , AVG(price) , COUNT(booking_id)
+        FROM Trip,Booking WHERE Booking.trip_id=Trip.trip_id
+        GROUP BY departure_station ,arrival_station;"""
+        cursor.execute(sql)
+        return cursor.fetchall()
+    
