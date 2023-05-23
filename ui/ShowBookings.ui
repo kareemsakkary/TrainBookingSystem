@@ -59,7 +59,7 @@ QPushButton:hover{
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>160</y>
+      <y>180</y>
       <width>621</width>
       <height>501</height>
      </rect>
@@ -161,7 +161,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>680</y>
+      <y>690</y>
       <width>471</width>
       <height>31</height>
      </rect>
@@ -171,7 +171,7 @@ text-align: center;</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Please double click on the trip to cancel it :(</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -189,6 +189,23 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Make your unforgettable train experience with us!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>120</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 15pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>All booked trips</string>
     </property>
    </widget>
   </widget>
