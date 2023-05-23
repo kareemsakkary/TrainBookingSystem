@@ -35,4 +35,4 @@ db = databaseSQL.database()
 # print(db.count("Train"))
 # print(db.count("Booking"))
 for i in db.tableSizes():
-    print(i[1][0])
+    print(i[0])

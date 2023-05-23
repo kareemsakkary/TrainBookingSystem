@@ -193,9 +193,9 @@ class database:
 
     def reportTrips(self):
         cursor = self.connection.cursor()
-        sql = """SELECT departure_station , arrival_station , COUNT(Trip.trip_id), COUNT(booking_id) , AVG(price) 
-        FROM Trip,Booking WHERE Booking.trip_id=Trip.trip_id
-        GROUP BY departure_station ,arrival_station;"""
+        sql = """SELECT departure_station , arrival_station , COUNT(Trip.trip_id) , count(Booking.trip_id) , AVG(price) 
+                FROM Trip full OUTER JOIN Booking on Trip.trip_id = Booking.trip_id
+                GROUP BY departure_station ,arrival_station;"""
         cursor.execute(sql)
         return cursor.fetchall()
     
