@@ -28,7 +28,6 @@ class database:
                     i=0
             if(i > 0):
                 cursor.execute(sql)
-
             
         else:
             cursor = self.connection.cursor()
@@ -77,7 +76,6 @@ class database:
         cursor.execute(sql)
         if(data.table == 'Booking'):
             cursor = self.connection.cursor()
-          
             sql = f"""
                 UPDATE TOP({data.no_of_seats}) Seat SET status = 'available' WHERE trip_id = {data.trip.trip_id} AND status = 'booked';
             """
@@ -166,6 +164,7 @@ class database:
                 FROM Trip,Seat,Train
                 Where
                 Trip.trip_id = Seat.trip_id
+                AND Trip.train_id = Train.train_id
                 AND Seat.status = 'available'
                 """
         if(arrival_station):
@@ -194,8 +193,7 @@ class database:
     def reportTrips(self):
         cursor = self.connection.cursor()
         sql = """SELECT departure_station , arrival_station , COUNT(Trip.trip_id) , count(Booking.trip_id) , AVG(Trip.price) 
-                FROM Trip full OUTER JOIN Booking on Trip.trip_id = Booking.trip_id
-                GROUP BY departure_station ,arrival_station;"""
+                FROM Trip full OUTER JOIN Booking on Trip.trip_id = Booking.trip_id GROUP BY departure_station ,arrival_station;"""
         cursor.execute(sql)
         return cursor.fetchall()
     
