@@ -162,12 +162,12 @@ class database:
 
     def getTrips(self,seats,arrival_station=None,departure_station=None,start_date=None,end_date=None):
         cursor = self.connection.cursor()
-        sql = f"""SELECT Trip.*, COUNT(Seat.seat_id) , Train
-                FROM Trip,Seat
-                Where
-                Trip.trip_id = Seat.trip_id
-                AND Seat.status = 'available'
-                """
+        sql = f"""SELECT Trip.*, COUNT(Seat.seat_id) , Train.*
+                        FROM Trip,Seat,Train
+                        Where
+                        Trip.trip_id = Seat.trip_id
+                        AND Seat.status = 'available'
+                        """
         if(arrival_station):
             sql += f"AND Trip.arrival_station = '{arrival_station}' "
         if(departure_station):

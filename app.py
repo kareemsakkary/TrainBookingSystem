@@ -651,8 +651,8 @@ class BookTripScreen(QDialog):
 
         if int(numofseats) > db.count("Seat",f"status = 'available' and trip_id = '{selectedTrip.trip_id}';"):
             self.error.setText("Not enough seats!")
-        elif db.selectAll("Booking", f"account_id = '{loggedInUser.account_id}' and trip_id = '{selectedTrip.trip_id}'"):
-            booking = db.selectAll("Booking", f"account_id = '{loggedInUser.account_id}' and trip_id = '{selectedTrip.trip_id}'")[0]
+        elif db.selectAll("Booking", f"account.account_id = '{loggedInUser.account_id}' and trip.trip_id = '{selectedTrip.trip_id}'"):
+            booking = db.selectAll("Booking", f"account.account_id = '{loggedInUser.account_id}' and trip.trip_id = '{selectedTrip.trip_id}'")[0]
             booking.set_seats_num(booking.no_of_seats + int(numofseats))
             db.update(booking)
             self.showMessageBox()
@@ -690,9 +690,9 @@ class ShowBookings(QDialog):
     def returnPrevScreen(self):
         widget.removeWidget(self)
     def loadBookings(self):
-        self.tableWidget.setRowCount(db.count("Booking",f"account_id = '{loggedInUser.account_id}'"))
+        self.tableWidget.setRowCount(db.count("Booking",f"account.account_id = '{loggedInUser.account_id}'"))
         tableRow = 0
-        for row in db.selectAll("Booking",f"account_id = '{loggedInUser.account_id}'"):
+        for row in db.selectAll("Booking",f"account.account_id = '{loggedInUser.account_id}'"):
             self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.booking_id)))
             self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(row.trip.departure_station))
             self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(row.trip.arrival_station))
@@ -715,7 +715,7 @@ class ShowBookings(QDialog):
         selectedBooking.no_of_seats = self.tableWidget.item(selectedRow, 5).text()
         selectedBooking.price = self.tableWidget.item(selectedRow, 6).text()
         selectedTrip.train_id = self.tableWidget.item(selectedRow, 7).text()
-        selectedTrip.price = db.selectAll("Trip",f"trip_id = '{selectedTrip.trip_id}'")[0].price
+        selectedTrip.price = db.selectAll("Trip",f"Trip.trip_id = '{selectedTrip.trip_id}'")[0].price
         self.gotocanceltrip()
     def gotocanceltrip(self):
         if datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S') < datetime.now():
@@ -850,7 +850,7 @@ class FindTripScreen(QDialog):
     def findTrip(self):
         departure_station = self.inputDepartureStation.text()
         arrival_station = self.inputArrivalStation.text()
-        start_date = self.inputStartDate.dateTime().toPyDateTime()
+        start_date = self.inputStartDate.dateTime().toPyDateTime().strftime('%Y-%m-%d %H:%M:%S')
         no_of_seats = int(self.inputSeatsCount.text())
         if len(str(no_of_seats)) == 0 or len(departure_station) == 0 or len(arrival_station) == 0:
             self.error.setText("Cannot search without the required fields!")
