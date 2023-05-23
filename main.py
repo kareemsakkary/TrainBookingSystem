@@ -30,5 +30,9 @@ db = databaseSQL.database()
 #
 # # for i in db.getTrips(1,arrival_station="dahab",departure_station="cairo"):
 # #     print("found")
-for i in db.reportTrips():
-    print(i)
+# print(db.count("Account"))
+# print(db.count("Trip"))
+# print(db.count("Train"))
+# print(db.count("Booking"))
+for i in db.tableSizes():
+    print(i[1][0])

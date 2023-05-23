@@ -199,3 +199,11 @@ class database:
         cursor.execute(sql)
         return cursor.fetchall()
     
+    def tableSizes(self):
+        cursor = self.connection.cursor()
+        sql = """SELECT COUNT(*) from Account """
+        sql += """UNION ALL SELECT COUNT(*) from Booking """
+        sql += """UNION ALL SELECT COUNT(*) from Train """
+        sql += """UNION ALL SELECT COUNT(*) from Trip ;"""
+        cursor.execute(sql)
+        return cursor.fetchall()
