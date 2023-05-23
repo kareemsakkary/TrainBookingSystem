@@ -911,10 +911,11 @@ class ShowReportScreen(QDialog):
     def loadInfo(self):
         self.tableWidget.setRowCount(len(db.reportTrips()))
         tableRow = 0
-        self.accountsNum.setText(str(db.count("Account")))
-        self.tripsNum.setText(str(db.count("Trip")))
-        self.trainsNum.setText(str(db.count("Train")))
-        self.bookingsNum.setText(str(db.count("Booking")))
+        sizes = db.tableSizes()
+        self.accountsNum.setText(str(sizes[0][0]))
+        self.tripsNum.setText(str(sizes[1][0]))
+        self.trainsNum.setText(str(sizes[2][0]))
+        self.bookingsNum.setText(str(sizes[3][0]))
         for row in db.reportTrips():
             item =QtWidgets.QTableWidgetItem(str(row[0]))
             item.setTextAlignment(4)
