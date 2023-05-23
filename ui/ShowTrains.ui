@@ -46,12 +46,12 @@ color: rgb(255, 255, 255);</string>
      <string>Make your unforgettable train experience with us!</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="selectTrainButton">
+   <widget class="QPushButton" name="updateTrainButton">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>710</y>
-      <width>361</width>
+      <x>90</x>
+      <y>700</y>
+      <width>300</width>
       <height>61</height>
      </rect>
     </property>
@@ -69,7 +69,7 @@ QPushButton:hover{
 }</string>
     </property>
     <property name="text">
-     <string>Select Train</string>
+     <string>Update Train</string>
     </property>
    </widget>
    <widget class="QPushButton" name="returnButton">
@@ -161,6 +161,32 @@ color:rgb(180, 0, 0)</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteTrainButton">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>700</y>
+      <width>300</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-radius: 20px;
+background-color: rgb(255, 255, 255);
+font: 63 12pt &quot;Sitka Small Semibold&quot;;
+color:rgb(0, 86, 148);
+}
+
+QPushButton:hover{
+	background-color: #00508a;
+	color:white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Delete Train</string>
     </property>
    </widget>
   </widget>

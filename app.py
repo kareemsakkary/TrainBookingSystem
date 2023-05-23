@@ -302,12 +302,20 @@ class ShowAllTrains(QDialog):
         self.tableWidget.setColumnWidth(3, 150)
         self.tableWidget.setColumnWidth(4, 200)
         self.tableWidget.setHorizontalHeaderLabels(["Train ID", "Capacity", "Status", "Number of cart", "Manufacturer"])
-        self.tableWidget.horizontalHeader().setFixedHeight(20)
+        self.tableWidget.horizontalHeader().setFixedHeight(40)
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.loadTrains()
-        self.selectTrainButton.clicked.connect(self.gotoupdatetrain)
+        self.updateTrainButton.clicked.connect(self.gotoupdatetrain)
+        self.deleteTrainButton.clicked.connect(self.gotodeletetrain)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.cellClicked.connect(self.getClickedCell)
+
+    def showMessageBox(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Success deletion!")
+        msg.setText("Train deleted successfully!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
 
     def clearSelected(self):
         global selected
@@ -343,6 +351,15 @@ class ShowAllTrains(QDialog):
             self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.no_of_cart)))
             self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(row.manufacture))
             tableRow += 1
+
+    def gotodeletetrain(self):
+        if selected:
+            self.error.setText("")
+            db.deleteRecord(selectedTrain)
+            self.showMessageBox()
+            self.returnPrevScreen()
+        else:
+            self.error.setText("Please select a train to delete!")
 
     def gotoupdatetrain(self):
         if selected:
@@ -548,7 +565,7 @@ class ShowAllTrips(QDialog):
         self.tableWidget.setHorizontalHeaderLabels(["Trip Id","Departure Station", "Arrival Station", "Price", "Start Date", "End Date", "Train ID"])
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.loadTrips()
-        self.tableWidget.horizontalHeader().setFixedHeight(20)
+        self.tableWidget.horizontalHeader().setFixedHeight(40)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
         if loggedInUser.role == "admin":
@@ -689,7 +706,7 @@ class ShowBookings(QDialog):
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.tableWidget.setHorizontalHeaderLabels(["Booking ID", "Departure Station", "Arrival Station", "Departure Date", "Arrival Date","Seat Count" , "Price","Train ID", "Trip ID"])
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
-        self.tableWidget.horizontalHeader().setFixedHeight(20)
+        self.tableWidget.horizontalHeader().setFixedHeight(40)
         self.loadBookings()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
@@ -877,6 +894,8 @@ class FindTripScreen(QDialog):
             else:
                 widget.addWidget(ShowMatchingTripsScreen())
                 widget.setCurrentIndex(widget.currentIndex() + 1)
+
+
 class ShowReportScreen(QDialog):
     def __init__(self):
         super(ShowReportScreen, self).__init__()
@@ -887,7 +906,6 @@ class ShowReportScreen(QDialog):
         self.returnButton.clicked.connect(self.returnPrevScreen)
 
     def returnPrevScreen(self):
-        self.clearSelected()
         widget.removeWidget(self)
 
     def loadInfo(self):

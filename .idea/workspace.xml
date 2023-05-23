@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f928daff-1589-44be-9094-a10f197f7454" name="Changes" comment="add report">
+    <list default="true" id="f928daff-1589-44be-9094-a10f197f7454" name="Changes" comment="fix bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Report.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/Report.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ShowTrains.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ShowTrains.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,12 +23,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
-  }
-}</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.app">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -215,21 +210,7 @@
       <option name="project" value="LOCAL" />
       <updated>1684838741166</updated>
     </task>
-    <task id="LOCAL-00019" summary="add report">
-      <created>1684846261205</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1684846261205</updated>
-    </task>
-    <task id="LOCAL-00020" summary="add report">
-      <created>1684847027165</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1684847027165</updated>
-    </task>
-    <option name="localTasksCounter" value="21" />
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,6 +223,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="made capacity readonly" />
@@ -250,19 +232,17 @@
     <MESSAGE value="fix bug" />
     <MESSAGE value="edit ui" />
     <MESSAGE value="fix bugs" />
-    <MESSAGE value="add report" />
-    <option name="LAST_COMMIT_MESSAGE" value="add report" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bugs" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="row.cursor_description.__len__()" />
+        <watch expression="row.cursor_description.__len__()" language="Python" />
+        <watch expression="self" />
+        <watch expression="row.cursor_description.__len__()" />
+        <watch expression="self" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TrainBookingSystem$databaseSQL.coverage" NAME="databaseSQL Coverage Results" MODIFIED="1684831658419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TrainBookingSystem$app.coverage" NAME="app Coverage Results" MODIFIED="1684847207066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TrainBookingSystem$main.coverage" NAME="main Coverage Results" MODIFIED="1684833186222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
