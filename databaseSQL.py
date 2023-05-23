@@ -103,7 +103,6 @@ class database:
             sql = f"""select * from {tablename}"""
         else:
             sql = f"""select * from {tablename} WHERE {where}"""
-        print(sql)
         cursor.execute(sql)
         rows = cursor.fetchall()
         li = []
@@ -181,7 +180,6 @@ class database:
                 ,Train.train_id,Train.capacity,Train.status,Train.no_of_carts,Train.manufacturer
                 HAVING COUNT(Seat_id) > {seats};"""
         li =[]
-        print(sql)
         cursor.execute(sql)
         rows = cursor.fetchall()
         for row in rows:

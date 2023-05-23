@@ -421,8 +421,6 @@ class UpdateTrainScreen(QDialog):
             widget.removeWidget(widget.currentWidget())
 
 
-# -------------------------------------------------------
-# Shahd - Screens
 class AddTripScreen(QDialog):
     def __init__(self):
         super(AddTripScreen, self).__init__()
@@ -484,10 +482,8 @@ class UpdateTripScreen(QDialog):
         loadUi("ui/UpdateTrip.ui", self)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.updateTripButton.clicked.connect(self.updatetripfunction)
-        startDate = datetime.strptime(selectedTrip.start_date, '%Y-%m-%d %H:%M:%S')
-        endDate = datetime.strptime(selectedTrip.end_date, '%Y-%m-%d %H:%M:%S')
-        self.inputStartDate.setMinimumDateTime(startDate)
-        self.inputEndDate.setMinimumDateTime(endDate)
+        self.inputStartDate.setMinimumDateTime(datetime.now())
+        self.inputEndDate.setMinimumDateTime(datetime.now())
         self.loadTripInfo()
         intValidator = QtGui.QIntValidator()
         floatValidator = QtGui.QDoubleValidator()
@@ -612,9 +608,6 @@ class BookTripScreen(QDialog):
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.bookTripButton.clicked.connect(self.booktripfunction)
         self.loadTripInfo()
-        intValidator = QtGui.QIntValidator()
-        txtRegex = QRegExp("[a-zA-Z]+")
-        stringValidator = QRegExpValidator(txtRegex)
         self.seatCountInput.textChanged.connect(self.updateTotalPrice)
 
     def clearSelected(self):
@@ -693,6 +686,7 @@ class ShowBookings(QDialog):
         self.loadBookings()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
+
     def returnPrevScreen(self):
         widget.removeWidget(self)
     def loadBookings(self):
@@ -730,8 +724,6 @@ class ShowBookings(QDialog):
             widget.removeWidget(self)
             widget.addWidget(CancelTripScreen())
             widget.setCurrentIndex(widget.currentIndex() + 1)
-
-
 
 
 class CancelTripScreen(QDialog):
@@ -844,18 +836,28 @@ class FindTripScreen(QDialog):
         super(FindTripScreen, self).__init__()
         # load UI
         loadUi("ui/FindTrip.ui", self)
+        txtRegex = QRegExp("[a-zA-Z]+")
+        stringValidator = QRegExpValidator(txtRegex)
+        self.inputDepartureStation.setValidator(stringValidator)
+        self.inputArrivalStation.setValidator(stringValidator)
+        self.inputStartDate.setMinimumDateTime(datetime.now())
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.findTripButton.clicked.connect(self.findTrip)
+
     def returnPrevScreen(self):
         widget.removeWidget(self)
+
     def findTrip(self):
         departure_station = self.inputDepartureStation.text()
         arrival_station = self.inputArrivalStation.text()
         start_date = self.inputStartDate.dateTime().toPyDateTime()
         no_of_seats = int(self.inputSeatsCount.text())
-        matchingTrips.extend(db.getTrips(no_of_seats, arrival_station,departure_station, start_date))
-        widget.addWidget(ShowMatchingTripsScreen())
-        widget.setCurrentIndex(widget.currentIndex() + 1)
+        if len(str(no_of_seats)) == 0 or len(departure_station) == 0 or len(arrival_station) == 0:
+            self.error.setText("Cannot search without the required fields!")
+        else:
+            matchingTrips.extend(db.getTrips(no_of_seats, arrival_station,departure_station, start_date))
+            widget.addWidget(ShowMatchingTripsScreen())
+            widget.setCurrentIndex(widget.currentIndex() + 1)
 
 class AdminOptionsScreen(QDialog):
     def __init__(self):
