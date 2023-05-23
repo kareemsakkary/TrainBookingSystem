@@ -899,11 +899,25 @@ class ShowReportScreen(QDialog):
         self.trainsNum.setText(str(db.count("Train")))
         self.bookingsNum.setText(str(db.count("Booking")))
         for row in db.reportTrips():
-            self.tableWidget.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
-            self.tableWidget.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
-            self.tableWidget.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
-            self.tableWidget.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row[4])))
-            self.tableWidget.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row[3])))
+            item =QtWidgets.QTableWidgetItem(str(row[0]))
+            item.setTextAlignment(4)
+            self.tableWidget.setItem(tableRow, 0, item)
+
+            item =QtWidgets.QTableWidgetItem(str(row[1]))
+            item.setTextAlignment(4)
+            self.tableWidget.setItem(tableRow, 1, item)
+
+            item =QtWidgets.QTableWidgetItem(str(row[2]))
+            item.setTextAlignment(4)
+            self.tableWidget.setItem(tableRow, 2, item)
+
+            item =QtWidgets.QTableWidgetItem(str(row[4]))
+            item.setTextAlignment(4)
+            self.tableWidget.setItem(tableRow, 3, item)
+
+            item =QtWidgets.QTableWidgetItem(str(row[3]))
+            item.setTextAlignment(4)
+            self.tableWidget.setItem(tableRow, 4, item)
             tableRow += 1
 
 class AdminOptionsScreen(QDialog):
