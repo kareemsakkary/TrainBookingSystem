@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f928daff-1589-44be-9094-a10f197f7454" name="Changes" comment="fix bugs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/BookTrip.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/BookTrip.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/CancelBooking.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/CancelBooking.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/FindTrip.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/FindTrip.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ShowBookings.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ShowBookings.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684837113144</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fix bugs">
+      <created>1684837979906</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1684837979906</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
