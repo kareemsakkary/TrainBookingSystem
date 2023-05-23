@@ -879,12 +879,14 @@ class FindTripScreen(QDialog):
                 widget.setCurrentIndex(widget.currentIndex() + 1)
 class ShowReportScreen(QDialog):
     def __init__(self):
-        super(UserOptionsScreen, self).__init__()
+        super(ShowReportScreen, self).__init__()
         loadUi("ui/Report.ui", self)
         self.loadInfo()
-        self.tableWidget.horizontalHeader().setFixedHeight(20)
+        self.tableWidget.setTextAlignment(4)
+        self.tableWidget.horizontalHeader().setFixedHeight(40)
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.returnButton.clicked.connect(self.returnPrevScreen)
+
     def returnPrevScreen(self):
         self.clearSelected()
         widget.removeWidget(self)
@@ -912,7 +914,7 @@ class AdminOptionsScreen(QDialog):
         self.updateTrainButton.clicked.connect(self.gotoshowtrains)
         self.addTripButton.clicked.connect(self.gotoaddtrip)
         self.updateTripButton.clicked.connect(self.gotoshowtrips)
-        self.showReportsButton.clicked.connect(self.gotoshowreport)
+        self.showReportButton.clicked.connect(self.gotoshowreport)
         self.returnButton.clicked.connect(self.returnPrevScreen)
 
     def returnPrevScreen(self):
