@@ -302,6 +302,7 @@ class ShowAllTrains(QDialog):
         self.tableWidget.setColumnWidth(3, 150)
         self.tableWidget.setColumnWidth(4, 200)
         self.tableWidget.setHorizontalHeaderLabels(["Train ID", "Capacity", "Status", "Number of cart", "Manufacturer"])
+        self.tableWidget.horizontalHeader().setFixedHeight(20)
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.loadTrains()
         self.selectTrainButton.clicked.connect(self.gotoupdatetrain)
@@ -547,6 +548,7 @@ class ShowAllTrips(QDialog):
         self.tableWidget.setHorizontalHeaderLabels(["Trip Id","Departure Station", "Arrival Station", "Price", "Start Date", "End Date", "Train ID"])
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.loadTrips()
+        self.tableWidget.horizontalHeader().setFixedHeight(20)
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
         if loggedInUser.role == "admin":
@@ -687,6 +689,7 @@ class ShowBookings(QDialog):
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.tableWidget.setHorizontalHeaderLabels(["Booking ID", "Departure Station", "Arrival Station", "Departure Date", "Arrival Date","Seat Count" , "Price","Train ID", "Trip ID"])
         self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
+        self.tableWidget.horizontalHeader().setFixedHeight(20)
         self.loadBookings()
         self.returnButton.clicked.connect(self.returnPrevScreen)
         self.tableWidget.doubleClicked.connect(self.getClickedCell)
