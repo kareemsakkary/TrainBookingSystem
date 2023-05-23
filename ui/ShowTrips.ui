@@ -75,6 +75,9 @@ text-align: center;</string>
     <property name="sizeAdjustPolicy">
      <enum>QAbstractScrollArea::AdjustToContents</enum>
     </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::DoubleClicked</set>
+    </property>
     <property name="gridStyle">
      <enum>Qt::CustomDashLine</enum>
     </property>
