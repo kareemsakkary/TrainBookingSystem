@@ -109,7 +109,7 @@ class Trip:
         self.end_date = end
         return end-start
     def key(self) ->str:
-        return f'trip_id = {self.trip_id}'
+        return f'Trip.trip_id = {self.trip_id}'
 
 class Seat:
     def __init__(self,row=[None,None,None]) -> None:
@@ -127,7 +127,7 @@ class Seat:
         """
         return st
     def key(self) ->str:
-        return f'seat_id = {self.seat_id}'
+        return f'Seat.seat_id = {self.seat_id}'
 
 class Booking:
     def __init__(self, row = [None,None,None,None]) -> None:
