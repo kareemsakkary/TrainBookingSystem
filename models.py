@@ -147,6 +147,7 @@ class Booking:
     def update(self) -> str:
         st = f"""
         no_of_seats = '{self.no_of_seats}';
+        where booking_id = {self.booking_id}
         """
         return st
     def key(self) ->str:
