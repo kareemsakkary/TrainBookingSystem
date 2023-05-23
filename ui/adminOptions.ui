@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>849</height>
+    <height>840</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>90</y>
+      <y>80</y>
       <width>721</width>
       <height>61</height>
      </rect>
@@ -46,27 +46,10 @@ color: rgb(255, 255, 255);</string>
      <string>Make your unforgettable train experience with us!</string>
     </property>
    </widget>
-   <widget class="QLabel" name="optionmsg">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>200</y>
-      <width>561</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 20 17pt &quot;Sitka Heading Semibold&quot;;
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Please choose one of the following options:</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="addTrainButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>219</x>
       <y>300</y>
       <width>361</width>
       <height>61</height>
@@ -92,7 +75,7 @@ QPushButton:hover{
    <widget class="QPushButton" name="updateTripButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>219</x>
       <y>540</y>
       <width>361</width>
       <height>61</height>
@@ -118,7 +101,7 @@ QPushButton:hover{
    <widget class="QPushButton" name="addTripButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>219</x>
       <y>420</y>
       <width>361</width>
       <height>61</height>
@@ -144,7 +127,7 @@ QPushButton:hover{
    <widget class="QPushButton" name="updateTrainButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>219</x>
       <y>650</y>
       <width>361</width>
       <height>61</height>
@@ -193,6 +176,26 @@ QPushButton:hover{
      <string>Return</string>
     </property>
    </widget>
+  </widget>
+  <widget class="QLabel" name="optionmsg">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>190</y>
+     <width>561</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20 17pt &quot;Sitka Heading Semibold&quot;;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Please choose one of the following options:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
  </widget>
  <resources/>

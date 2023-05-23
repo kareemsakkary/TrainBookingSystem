@@ -49,7 +49,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="optionmsg">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>120</x>
       <y>190</y>
       <width>561</width>
       <height>41</height>
@@ -62,11 +62,14 @@ color: rgb(255, 255, 255);</string>
     <property name="text">
      <string>Please choose one of the following options:</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QPushButton" name="bookButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>219</x>
       <y>290</y>
       <width>361</width>
       <height>61</height>
@@ -92,7 +95,7 @@ QPushButton:hover{
    <widget class="QPushButton" name="updateInfoButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>219</x>
       <y>410</y>
       <width>361</width>
       <height>61</height>
@@ -118,7 +121,7 @@ QPushButton:hover{
    <widget class="QPushButton" name="findTripButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>219</x>
       <y>530</y>
       <width>361</width>
       <height>61</height>
@@ -170,7 +173,7 @@ QPushButton:hover{
    <widget class="QPushButton" name="tripsButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>219</x>
       <y>650</y>
       <width>361</width>
       <height>61</height>
