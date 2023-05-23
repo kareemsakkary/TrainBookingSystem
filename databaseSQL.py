@@ -193,7 +193,7 @@ class database:
 
     def reportTrips(self):
         cursor = self.connection.cursor()
-        sql = """SELECT departure_station , arrival_station , COUNT(Trip.trip_id) , AVG(price) , COUNT(booking_id)
+        sql = """SELECT departure_station , arrival_station , COUNT(Trip.trip_id), COUNT(booking_id) , AVG(price) 
         FROM Trip,Booking WHERE Booking.trip_id=Trip.trip_id
         GROUP BY departure_station ,arrival_station;"""
         cursor.execute(sql)

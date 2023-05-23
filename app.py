@@ -917,25 +917,10 @@ class ShowReportScreen(QDialog):
         self.trainsNum.setText(str(sizes[2][0]))
         self.bookingsNum.setText(str(sizes[3][0]))
         for row in db.reportTrips():
-            item =QtWidgets.QTableWidgetItem(str(row[0]))
-            item.setTextAlignment(4)
-            self.tableWidget.setItem(tableRow, 0, item)
-
-            item =QtWidgets.QTableWidgetItem(str(row[1]))
-            item.setTextAlignment(4)
-            self.tableWidget.setItem(tableRow, 1, item)
-
-            item =QtWidgets.QTableWidgetItem(str(row[2]))
-            item.setTextAlignment(4)
-            self.tableWidget.setItem(tableRow, 2, item)
-
-            item =QtWidgets.QTableWidgetItem(str(row[4]))
-            item.setTextAlignment(4)
-            self.tableWidget.setItem(tableRow, 3, item)
-
-            item =QtWidgets.QTableWidgetItem(str(row[3]))
-            item.setTextAlignment(4)
-            self.tableWidget.setItem(tableRow, 4, item)
+            for i in range(4):
+                item =QtWidgets.QTableWidgetItem(str(row[i]))
+                item.setTextAlignment(4)
+                self.tableWidget.setItem(tableRow, i, item)
             tableRow += 1
 
 class AdminOptionsScreen(QDialog):
