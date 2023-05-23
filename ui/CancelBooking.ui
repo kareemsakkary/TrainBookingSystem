@@ -170,7 +170,7 @@ color: rgb(255, 255, 255);</string>
     <property name="styleSheet">
      <string notr="true">background-color: white;
 border-radius: 10px;
-font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+</string>
     </property>
     <property name="text">
      <string/>
@@ -191,7 +191,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="styleSheet">
      <string notr="true">background-color: white;
 border-radius: 10px;
-font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+</string>
     </property>
     <property name="text">
      <string/>
@@ -218,7 +218,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="styleSheet">
      <string notr="true">background-color: white;
 border-radius: 10px;
-font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+</string>
     </property>
     <property name="text">
      <string/>
@@ -245,7 +245,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="styleSheet">
      <string notr="true">background-color: white;
 border-radius: 10px;
-font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+</string>
     </property>
     <property name="text">
      <string/>
@@ -383,7 +383,7 @@ color: rgb(255, 255, 255);</string>
     <property name="styleSheet">
      <string notr="true">background-color: white;
 border-radius: 10px;
-font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+</string>
     </property>
     <property name="text">
      <string/>
@@ -410,7 +410,7 @@ font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
     <property name="styleSheet">
      <string notr="true">background-color: white;
 border-radius: 10px;
-font: 63 12pt &quot;Sitka Small Semibold&quot;;</string>
+</string>
     </property>
     <property name="text">
      <string/>
