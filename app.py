@@ -995,6 +995,7 @@ class UserOptionsScreen(QDialog):
         widget.addWidget(findTrip)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
+
 # main
 if __name__ == "__main__":
     app = QApplication(sys.argv)
