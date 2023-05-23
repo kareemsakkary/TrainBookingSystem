@@ -77,7 +77,8 @@ class Trip:
         self.end_date = row[4]
         self.departure_station = row[5]
         self.arrival_station = row[6]
-        self.available_seat = row[7]     
+        if(len(row) > 7):
+            self.available_seat = row[7]     
         self.seats=[]
         self.ETA = None
         self.train = None
