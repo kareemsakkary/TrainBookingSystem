@@ -45,6 +45,9 @@
      <string notr="true">border-radius: 10px;
 </string>
     </property>
+    <property name="maxLength">
+     <number>255</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="inputArrivalStation">
     <property name="geometry">
@@ -57,6 +60,9 @@
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="maxLength">
+     <number>255</number>
     </property>
    </widget>
    <widget class="QLabel" name="depatureStationLabel">
