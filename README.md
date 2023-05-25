@@ -32,6 +32,6 @@ time, source, destination, required number of seats…)
 ### Install pyqt5-tools library using the following command:
 - ```pip install pyqt5-tools```
 
-# Tools used:
+# Tools used
 - PyCharm: an integrated development environment (IDE) used in computer programming, specifically for the Python language.
 - Qt Designer: a tool for building graphical user interfaces with Qt widgets from the Qt GUI framework.
