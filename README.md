@@ -25,11 +25,11 @@ time, source, destination, required number of seats…)
 - ui folder: a folder that contains the ui files of the system.
 
 # How to run the system
-###Install pyodbc library using the following command:
+### Install pyodbc library using the following command:
 - ```pip install pyodbc```
-###Install pyqt5 library using the following command:
+### Install pyqt5 library using the following command:
 - ```pip install pyqt5```
-###Install pyqt5-tools library using the following command:
+### Install pyqt5-tools library using the following command:
 - ```pip install pyqt5-tools```
 
 # Tools used:
