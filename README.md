@@ -10,10 +10,7 @@ This repository contains the implementation of a train booking system that has m
 time, source, destination, required number of seats…)
 - Performing operations on trips: Booking, and canceling.
 
-### Online server used:
-- somee.com
-
-# File Included
+# Files Included
 - app.py: The main file that runs the app.
 - models.py: a file that contains the classes of the system.
 - databaseSQL.py: a file that contains the database connection and the queries.
