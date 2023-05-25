@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f928daff-1589-44be-9094-a10f197f7454" name="Changes" comment="update readme.md" />
+    <list default="true" id="f928daff-1589-44be-9094-a10f197f7454" name="Changes" comment="final commit 3 :')">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +28,10 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TrainBooking" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Python.app">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -256,28 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684866024214</updated>
     </task>
-    <task id="LOCAL-00025" summary="added readme.md">
-      <created>1685003181229</created>
+    <task id="LOCAL-00025" summary="final commit 3 :')">
+      <created>1684866974823</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1685003181229</updated>
+      <updated>1684866974823</updated>
     </task>
-    <task id="LOCAL-00026" summary="update readme.md">
-      <created>1685003274256</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1685003274256</updated>
-    </task>
-    <task id="LOCAL-00027" summary="update readme.md">
-      <created>1685003438675</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1685003438675</updated>
-    </task>
-    <option name="localTasksCounter" value="28" />
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,20 +295,10 @@
     <MESSAGE value="delete main" />
     <MESSAGE value="final commit :')" />
     <MESSAGE value="final commit 2 :')" />
-    <MESSAGE value="added readme.md" />
-    <MESSAGE value="update readme.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="update readme.md" />
+    <MESSAGE value="final commit 3 :')" />
+    <option name="LAST_COMMIT_MESSAGE" value="final commit 3 :')" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app.py</url>
-          <line>683</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="row.cursor_description.__len__()" />

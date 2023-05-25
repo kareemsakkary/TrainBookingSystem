@@ -59,6 +59,9 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">border-radius: 10px;
 </string>
     </property>
+    <property name="maxLength">
+     <number>255</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="inputPassword">
     <property name="geometry">
@@ -71,6 +74,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="maxLength">
+     <number>255</number>
     </property>
    </widget>
    <widget class="QLabel" name="emailLabel">

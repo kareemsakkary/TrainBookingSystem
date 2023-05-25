@@ -59,6 +59,9 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">border-radius: 10px;
 </string>
     </property>
+    <property name="maxLength">
+     <number>255</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="inputEmail">
     <property name="geometry">
@@ -71,6 +74,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="maxLength">
+     <number>255</number>
     </property>
    </widget>
    <widget class="QLabel" name="nameLabel">
@@ -145,6 +151,9 @@ QPushButton:hover{
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
     </property>
+    <property name="maxLength">
+     <number>255</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="inputNumber">
     <property name="geometry">
@@ -157,6 +166,9 @@ QPushButton:hover{
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="maxLength">
+     <number>255</number>
     </property>
    </widget>
    <widget class="QLabel" name="passwordLabel">
@@ -221,6 +233,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="maxLength">
+     <number>255</number>
     </property>
    </widget>
    <widget class="QLabel" name="addressLabel">

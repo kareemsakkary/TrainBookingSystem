@@ -101,6 +101,9 @@ QPushButton:hover{
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
     </property>
+    <property name="maxLength">
+     <number>255</number>
+    </property>
    </widget>
    <widget class="QPushButton" name="returnButton">
     <property name="geometry">
@@ -157,6 +160,9 @@ color: rgb(255, 255, 255);</string>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
     </property>
+    <property name="maxLength">
+     <number>255</number>
+    </property>
    </widget>
    <widget class="QLabel" name="numofcartLabel">
     <property name="geometry">
@@ -186,6 +192,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="maxLength">
+     <number>255</number>
     </property>
    </widget>
    <widget class="QLabel" name="manufacturerLabel">
